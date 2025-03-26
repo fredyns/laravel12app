@@ -19,6 +19,42 @@
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <!-- Dark Mode Switch -->
+                <div class="ms-3 relative">
+                    <div x-data="window.themeSwitcher()" x-init="switchTheme()" @keydown.window.tab="switchOn = false"
+                         class="flex items-center justify-center space-x-2">
+                        <input id="thisId" type="checkbox" name="switch" class="hidden" :checked="switchOn">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="white" stroke-width="0.5" stroke="gray" class="size-5">
+                            <path
+                                d="M10 2a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 2ZM10 15a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0v-1.5A.75.75 0 0 1 10 15ZM10 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6ZM15.657 5.404a.75.75 0 1 0-1.06-1.06l-1.061 1.06a.75.75 0 0 0 1.06 1.06l1.06-1.06ZM6.464 14.596a.75.75 0 1 0-1.06-1.06l-1.06 1.06a.75.75 0 0 0 1.06 1.06l1.06-1.06ZM18 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 18 10ZM5 10a.75.75 0 0 1-.75.75h-1.5a.75.75 0 0 1 0-1.5h1.5A.75.75 0 0 1 5 10ZM14.596 15.657a.75.75 0 0 0 1.06-1.06l-1.06-1.061a.75.75 0 1 0-1.06 1.06l1.06 1.06ZM5.404 6.464a.75.75 0 0 0 1.06-1.06l-1.06-1.06a.75.75 0 1 0-1.061 1.06l1.06 1.06Z"/>
+                        </svg>
+
+                        <button
+                            x-ref="switchButton"
+                            type="button"
+                            @click="switchOn = ! switchOn; switchTheme()"
+                            :class="switchOn ? 'bg-blue-600' : 'bg-neutral-200'"
+                            class="relative inline-flex h-6 py-0.5 ml-4 focus:outline-none rounded-full w-10">
+                            <span :class="switchOn ? 'translate-x-[18px]' : 'translate-x-0.5'"
+                                  class="w-5 h-5 duration-200 ease-in-out bg-white rounded-full shadow-md"></span>
+                        </button>
+
+                        <label @click="$refs.switchButton.click(); $refs.switchButton.focus()" :id="$id('switch')"
+                               :class="{ 'text-blue-600': switchOn, 'text-gray-400': ! switchOn }"
+                               class="text-sm select-none">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                 class="size-5">
+                                <path fill-rule="evenodd"
+                                      d="M7.455 2.004a.75.75 0 0 1 .26.77 7 7 0 0 0 9.958 7.967.75.75 0 0 1 1.067.853A8.5 8.5 0 1 1 6.647 1.921a.75.75 0 0 1 .808.083Z"
+                                      clip-rule="evenodd"/>
+                            </svg>
+
+                        </label>
+                    </div>
+                </div>
+
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ms-3 relative">

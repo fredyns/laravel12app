@@ -20,4 +20,6 @@ export default {
     },
 
     plugins: [forms, typography],
+
+    darkMode: 'class', // or 'media' if you want to use the OS setting
 };
