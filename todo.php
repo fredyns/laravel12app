@@ -1,7 +1,6 @@
 <?php
 /**
  * TODO:
- * 6. install spatie/permission
  * 8. ganti tabel ID dengan UUID
  * 9. cari tau, install, tabel password_reset_token
  * 10. cari tau, install, tabel failed_jobs
