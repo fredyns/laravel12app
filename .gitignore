@@ -25,3 +25,5 @@ yarn-error.log
 /vemto-template-plugin.zip
 *.bak
 *~*
+/apache.conf
+/docker-compose.yml
