@@ -112,7 +112,7 @@ if __name__ == "__main__":
     except NameError:
         script_dir = os.getcwd()
 
-    output_dir = os.path.join(script_dir, "..", "config", "tables")
+    output_dir = os.path.join(script_dir, "..", "generator", "tables")
     os.makedirs(output_dir, exist_ok=True)
 
     schema = grt.root.wb.doc.physicalModels[0].catalog.schemata[0]
