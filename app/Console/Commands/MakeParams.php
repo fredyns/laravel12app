@@ -329,7 +329,7 @@ class MakeParams extends Command
 
             case 'ENUM':
                 if (isset($column['options']) and is_array($column['options'])) {
-                    return 'randomElement(' . var_export($column['options'], true) . ')';
+                    return 'randomElement(' . Arraying::export($column['options'], true) . ')';
                 } else {
                     return null;
                 }
@@ -548,18 +548,12 @@ class MakeParams extends Command
 
     protected function saveParam($param, $tableName)
     {
-        $filePath = base_path(self::APP_PATH . '/' . $tableName . '.php');
-        $content = '<?php return ' . var_export($param, true) . ';';
-
-        file_put_contents($filePath, $content);
+        Arraying::saveToFile($param, self::APP_PATH . '/' . $tableName . '.php');
     }
 
     protected function saveMigrationOrder()
     {
-        $filePath = base_path(self::MIGRATION_ORDER_PATH);
-        $content = '<?php return ' . var_export($this->migrationOrder, true) . ';';
-
-        file_put_contents($filePath, $content);
+        Arraying::saveToFile($this->migrationOrder, self::MIGRATION_ORDER_PATH);
     }
 
 }
