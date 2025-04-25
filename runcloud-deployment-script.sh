@@ -1,6 +1,8 @@
 git reset --hard HEAD
 git pull
 
+composer dump-autoload -o
+
 composer update
 npm update
 
