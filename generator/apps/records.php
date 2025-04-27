@@ -1,0 +1,499 @@
+<?php
+return [
+    "name" => "records",
+    "columns" => [
+        [
+            "name" => "id",
+            "type" => "BINARY",
+            "nullable" => FALSE,
+            "default" => "(UUID_TO_BIN(UUID()))",
+        ],
+        [
+            "name" => "user_id",
+            "type" => "BINARY",
+            "nullable" => TRUE,
+            "default" => NULL,
+            "comment" => "#uuid",
+            "config" => [
+                "uuid" => TRUE,
+            ],
+        ],
+        [
+            "name" => "string",
+            "type" => "VARCHAR",
+            "nullable" => FALSE,
+            "default" => NULL,
+            "length" => 255,
+        ],
+        [
+            "name" => "email",
+            "type" => "VARCHAR",
+            "nullable" => TRUE,
+            "default" => NULL,
+            "length" => 255,
+            "comment" => "#email",
+            "config" => [
+                "email" => TRUE,
+            ],
+        ],
+        [
+            "name" => "integer",
+            "type" => "INT",
+            "nullable" => TRUE,
+            "default" => NULL,
+            "comment" => "#slider #min:1 #max:100",
+            "config" => [
+                "slider" => TRUE,
+                "min" => 1,
+                "max" => 100,
+            ],
+        ],
+        [
+            "name" => "decimal",
+            "type" => "DECIMAL",
+            "nullable" => TRUE,
+            "default" => NULL,
+        ],
+        [
+            "name" => "n_p_w_p",
+            "type" => "BIGINT",
+            "nullable" => TRUE,
+            "default" => NULL,
+            "comment" => "#npwp",
+            "config" => [
+                "npwp" => TRUE,
+            ],
+        ],
+        [
+            "name" => "datetime",
+            "type" => "DATETIME",
+            "nullable" => TRUE,
+            "default" => NULL,
+        ],
+        [
+            "name" => "date",
+            "type" => "DATE",
+            "nullable" => TRUE,
+            "default" => NULL,
+        ],
+        [
+            "name" => "time",
+            "type" => "TIME",
+            "nullable" => TRUE,
+            "default" => NULL,
+        ],
+        [
+            "name" => "i_p_address",
+            "type" => "VARCHAR",
+            "nullable" => TRUE,
+            "default" => NULL,
+            "length" => 255,
+            "comment" => "#ipaddress",
+            "config" => [
+                "ipaddress" => TRUE,
+            ],
+        ],
+        [
+            "name" => "boolean",
+            "type" => "TINYINT",
+            "nullable" => TRUE,
+            "default" => NULL,
+            "comment" => "#boolean",
+            "config" => [
+                "boolean" => TRUE,
+            ],
+        ],
+        [
+            "name" => "enumerate",
+            "type" => "ENUM",
+            "nullable" => TRUE,
+            "default" => NULL,
+            "options" => [
+                "enable",
+                "disable",
+            ],
+        ],
+        [
+            "name" => "text",
+            "type" => "TEXT",
+            "nullable" => TRUE,
+            "default" => NULL,
+        ],
+        [
+            "name" => "file",
+            "type" => "TEXT",
+            "nullable" => TRUE,
+            "default" => NULL,
+            "comment" => "#file",
+            "config" => [
+                "file" => TRUE,
+            ],
+        ],
+        [
+            "name" => "image",
+            "type" => "TEXT",
+            "nullable" => TRUE,
+            "default" => NULL,
+            "comment" => "#image:jpg,jpeg,png",
+            "config" => [
+                "image" => "jpg,jpeg,png",
+            ],
+        ],
+        [
+            "name" => "markdown_text",
+            "type" => "TEXT",
+            "nullable" => TRUE,
+            "default" => NULL,
+            "comment" => "#markdown",
+            "config" => [
+                "markdown" => TRUE,
+            ],
+        ],
+        [
+            "name" => "w_y_s_i_w_y_g",
+            "type" => "TEXT",
+            "nullable" => TRUE,
+            "default" => NULL,
+            "comment" => "#wysiwyg",
+            "config" => [
+                "wysiwyg" => TRUE,
+            ],
+        ],
+        [
+            "name" => "latitude",
+            "type" => "DECIMAL",
+            "nullable" => TRUE,
+            "default" => NULL,
+        ],
+        [
+            "name" => "longitude",
+            "type" => "DECIMAL",
+            "nullable" => TRUE,
+            "default" => NULL,
+        ],
+        [
+            "name" => "created_at",
+            "type" => "TIMESTAMP",
+            "nullable" => TRUE,
+            "default" => "NOW()",
+        ],
+        [
+            "name" => "updated_at",
+            "type" => "TIMESTAMP",
+            "nullable" => TRUE,
+            "default" => NULL,
+        ],
+        [
+            "name" => "created_by",
+            "type" => "BINARY",
+            "nullable" => TRUE,
+            "default" => NULL,
+        ],
+        [
+            "name" => "updated_by",
+            "type" => "BINARY",
+            "nullable" => TRUE,
+            "default" => NULL,
+        ],
+    ],
+    "foreignKeys" => [
+        "user_id" => [
+            "name" => "fk_records_users",
+            "column" => "user_id",
+            "referenced_table" => "users",
+            "referenced_column" => "id",
+        ],
+    ],
+    "indices" => [
+        [
+            "name" => "PRIMARY",
+            "columns" => [
+                "id",
+            ],
+            "unique" => 0,
+        ],
+        [
+            "name" => "created_at",
+            "columns" => [
+                "created_at",
+            ],
+            "unique" => 0,
+        ],
+        [
+            "name" => "fk_records_users",
+            "columns" => [
+                "user_id",
+            ],
+            "unique" => 0,
+        ],
+    ],
+    "primaryKey" => [
+        "name" => "PRIMARY",
+        "columns" => [
+            "id",
+        ],
+    ],
+    "faker" => [
+        "id" => NULL,
+        "user_id" => "uuid()",
+        "string" => "word()",
+        "email" => "safeEmail()",
+        "integer" => "randomNumber(5, true)",
+        "decimal" => "randomFloat(5, true)",// todo: cek
+        "n_p_w_p" => "randomNumber(5, true)",
+        "datetime" => "dateTimeThisDecade()",
+        "date" => "dateTimeThisDecade()",
+        "time" => "time()",
+        "i_p_address" => "localIpv4()",
+        "boolean" => "boolean(0.5)",
+        "enumerate" => "randomElement([\"enable\", \"disable\", ])",// todo: cek
+        "text" => "text(5)",
+        "file" => NULL,
+        "image" => NULL,
+        "markdown_text" => "paragraph()",
+        "w_y_s_i_w_y_g" => "randomHtml()",
+        "latitude" => "randomFloat(5, true)",
+        "longitude" => "randomFloat(5, true)",
+        "created_at" => NULL,
+        "updated_at" => NULL,
+        "created_by" => NULL,
+        "updated_by" => NULL,
+    ],
+    "seeder" => 10,
+    "modelName" => "Records",// todo: singular
+    "route" => "records",
+    "controllerName" => "RecordsController",// todo: cek
+    "viewFolder" => "records",
+    "index" => [
+        "paginate" => 10,
+        "columns" => [
+            "string",
+            "email",
+            "integer",
+            "decimal",
+            "n_p_w_p",
+            "datetime",
+            "date",
+            "time",
+            "i_p_address",
+            "boolean",
+            "enumerate",
+            "latitude",
+            "longitude",
+        ],
+    ],
+    "form" => [
+        "fields" => [
+            "id" => [
+                "type" => "text",
+                "config" => [
+                    "required" => TRUE,
+                ],
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "user_id" => [
+                "type" => "select",
+                "config" => [
+                    "model" => "App\\Models\\Users",
+                    "key" => "id",
+                    "label" => "name",
+                ],
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "string" => [
+                "type" => "text",
+                "config" => [
+                    "required" => TRUE,
+                ],
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "email" => [
+                "type" => "email",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "integer" => [
+                "type" => "slider",
+                "config" => [
+                    "min" => 1,
+                    "max" => 100,
+                ],
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "decimal" => [
+                "type" => "number",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "n_p_w_p" => [
+                "type" => "npwp",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "datetime" => [
+                "type" => "datetime",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "date" => [
+                "type" => "date",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "time" => [
+                "type" => "time",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "i_p_address" => [
+                "type" => "ipaddress",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "boolean" => [
+                "type" => "checkbox",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "enumerate" => [
+                "type" => "select",
+                "options" => [
+                    "enable" => "enable",
+                    "disable" => "disable",
+                ],
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "text" => [
+                "type" => "textarea",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "file" => [
+                "type" => "file",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "image" => [
+                "type" => "image",
+                "config" => [
+                    "image" => "jpg,jpeg,png",
+                ],
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "markdown_text" => [
+                "type" => "markdown",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "w_y_s_i_w_y_g" => [
+                "type" => "wysiwyg",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "latitude" => [
+                "type" => "number",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "longitude" => [
+                "type" => "number",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "created_at" => [
+                "type" => "text",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "updated_at" => [
+                "type" => "text",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "created_by" => [
+                "type" => "text",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+            "updated_by" => [
+                "type" => "text",
+                "col" => "full",
+                "col-md" => "full",
+                "col-lg" => "full",
+            ],
+        ],
+        "uploadPath" => "records",
+        "rules" => [],// todo: rules
+    ],
+    "show" => [
+        "cards" => [
+            "general" => [
+                "title" => "Model",// todo: cek
+                "fields" => [
+                    // todo: generate
+                    "field-name" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                ],
+            ],
+        ],
+    ],
+    "policy" => [
+        "viewAny" => "table.index",
+        "view" => "table.show",
+        "create" => "table.create",
+        "update" => "table.update",
+        "delete" => "table.delete",
+        "deleteAny" => "table.delete",
+        "restore" => FALSE,
+        "forceDelete" => FALSE,
+    ],
+    "lang" => [// todo: cek
+        "name" => "Records",
+        "index_title" => "Records List",
+        "new_title" => "New Record",
+        "create_title" => "Create Record",
+        "edit_title" => "Edit Record",
+        "show_title" => "Show Record",
+        "columns" => [
+            "user_id" => "User",
+            "string" => "String",
+        ],
+        "fields" => [
+            // todo: generate
+            "user_id" => "User",
+            "string" => "String",
+        ],
+    ],
+];
