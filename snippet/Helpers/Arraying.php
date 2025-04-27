@@ -38,24 +38,9 @@ class Arraying
             return self::tabs($indent) . '[]';
         }
 
-        return (self::areKeysNumeric($array)) ?
+        return (array_is_list($array)) ?
             self::exportList($array, $indent) :
             self::exportKeyPair($array, $indent);
-    }
-
-    public static function areKeysNumeric(Generator|array $array): bool
-    {
-        if ($array instanceof Generator) {
-            $array = iterator_to_array($array);
-        } else if (!is_array($array)) {
-            return true;
-        }
-
-        foreach (array_keys($array) as $index => $key) {
-            if ($index !== $key) return false;
-        }
-
-        return true;
     }
 
     protected static function exportList(array $array, $indent = 0): string
