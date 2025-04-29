@@ -174,14 +174,11 @@ return [
         "type" => "create",
         "uploadPath" => "image_resizing_queues/{year}/{id}",
         "rules" => [
-            "id" => ["required", "string"],
-            "created_at" => ["required", "string"],
             "source" => ["required", "string"],
             "save_as" => ["required", "string"],
             "width" => ["nullable", "numeric", "min:64"],
             "height" => ["nullable", "numeric", "min:64"],
             "remark" => ["nullable", "string"],
-            "metadata" => ["nullable", "string"],
         ],
         "sections" => [
             "general" => [
@@ -229,14 +226,11 @@ return [
         "type" => "update",
         "uploadPath" => "image_resizing_queues/{year}/{id}",
         "rules" => [
-            "id" => ["required", "string"],
-            "created_at" => ["required", "string"],
             "source" => ["required", "string"],
             "save_as" => ["required", "string"],
             "width" => ["nullable", "numeric", "min:64"],
             "height" => ["nullable", "numeric", "min:64"],
             "remark" => ["nullable", "string"],
-            "metadata" => ["nullable", "string"],
         ],
         "sections" => [
             "general" => [
@@ -287,43 +281,27 @@ return [
                 "title" => "Image Resizing Queue",
                 "fields" => [
                     "id" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "created_at" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "source" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "save_as" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "width" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "height" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "remark" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "metadata" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                 ],

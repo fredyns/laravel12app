@@ -238,14 +238,8 @@ return [
         "type" => "create",
         "uploadPath" => "users/{year}/{id}",
         "rules" => [
-            "id" => ["required", "string"],
-            "created_at" => ["required", "string"],
-            "updated_at" => ["nullable", "string"],
             "name" => ["nullable", "string"],
             "email" => ["nullable", "string"],
-            "email_verified_at" => ["nullable", "string"],
-            "password" => ["nullable", "string"],
-            "remember_token" => ["nullable", "string"],
             "two_factor_secret" => ["nullable", "string"],
             "two_factor_recovery_codes" => ["nullable", "string"],
             "two_factor_confirmed_at" => ["nullable", "string"],
@@ -295,14 +289,8 @@ return [
         "type" => "update",
         "uploadPath" => "users/{year}/{id}",
         "rules" => [
-            "id" => ["required", "string"],
-            "created_at" => ["required", "string"],
-            "updated_at" => ["nullable", "string"],
             "name" => ["nullable", "string"],
             "email" => ["nullable", "string"],
-            "email_verified_at" => ["nullable", "string"],
-            "password" => ["nullable", "string"],
-            "remember_token" => ["nullable", "string"],
             "two_factor_secret" => ["nullable", "string"],
             "two_factor_recovery_codes" => ["nullable", "string"],
             "two_factor_confirmed_at" => ["nullable", "string"],
@@ -355,68 +343,42 @@ return [
                 "title" => "User",
                 "fields" => [
                     "id" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "created_at" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "updated_at" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "name" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "email" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "email_verified_at" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "password" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "remember_token" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "two_factor_secret" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "two_factor_recovery_codes" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "two_factor_confirmed_at" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "current_team_id" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "profile_photo_path" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                 ],

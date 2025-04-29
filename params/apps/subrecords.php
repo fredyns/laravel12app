@@ -270,20 +270,20 @@ return [
     "action.index" => [
         "type" => "index",
         "paginate" => 10,
-        "columns" => [       "datetime",
-       "date",
-       "time",
-       "n_p_w_p",
-       "i_p_address",
-       "latitude",
-       "longitude"
-       ],
+        "columns" => [
+            "datetime",
+            "date",
+            "time",
+            "n_p_w_p",
+            "i_p_address",
+            "latitude",
+            "longitude",
+        ],
     ],
     "action.create" => [
         "type" => "create",
         "uploadPath" => "subrecords/{year}/{id}",
         "rules" => [
-            "id" => ["required", "string"],
             "records_id" => ["required", "uuid", "exists:records,id"],
             "datetime" => ["nullable", "date"],
             "date" => ["nullable", "string"],
@@ -296,8 +296,6 @@ return [
             "i_p_address" => ["nullable", "string"],
             "latitude" => ["nullable", "numeric"],
             "longitude" => ["nullable", "numeric"],
-            "created_at" => ["nullable", "string"],
-            "updated_at" => ["nullable", "string"],
         ],
         "sections" => [
             "general" => [
@@ -368,7 +366,6 @@ return [
         "type" => "update",
         "uploadPath" => "subrecords/{year}/{id}",
         "rules" => [
-            "id" => ["required", "string"],
             "records_id" => ["required", "uuid", "exists:records,id"],
             "datetime" => ["nullable", "date"],
             "date" => ["nullable", "string"],
@@ -381,8 +378,6 @@ return [
             "i_p_address" => ["nullable", "string"],
             "latitude" => ["nullable", "numeric"],
             "longitude" => ["nullable", "numeric"],
-            "created_at" => ["nullable", "string"],
-            "updated_at" => ["nullable", "string"],
         ],
         "sections" => [
             "general" => [
@@ -456,78 +451,48 @@ return [
                 "title" => "Subrecord",
                 "fields" => [
                     "id" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "records_id" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "datetime" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "date" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "time" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "n_p_w_p" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "markdown_text" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "w_y_s_i_w_y_g" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "file" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "image" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "i_p_address" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "latitude" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "longitude" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "created_at" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "updated_at" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                 ],

@@ -180,14 +180,12 @@ return [
         "type" => "create",
         "uploadPath" => "user_galleries/{year}/{id}",
         "rules" => [
-            "id" => ["required", "string"],
             "at" => ["required", "string"],
             "user_id" => ["required", "uuid", "exists:users,id"],
             "file" => ["required", "string"],
             "name" => ["nullable", "string"],
             "description" => ["nullable", "string"],
             "type" => ["nullable", "string"],
-            "metadata" => ["nullable", "string"],
         ],
         "sections" => [
             "general" => [
@@ -238,14 +236,12 @@ return [
         "type" => "update",
         "uploadPath" => "user_galleries/{year}/{id}",
         "rules" => [
-            "id" => ["required", "string"],
             "at" => ["required", "string"],
             "user_id" => ["required", "uuid", "exists:users,id"],
             "file" => ["required", "string"],
             "name" => ["nullable", "string"],
             "description" => ["nullable", "string"],
             "type" => ["nullable", "string"],
-            "metadata" => ["nullable", "string"],
         ],
         "sections" => [
             "general" => [
@@ -299,43 +295,27 @@ return [
                 "title" => "User Gallery",
                 "fields" => [
                     "id" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "at" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "user_id" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "file" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "name" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "description" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "type" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "metadata" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                 ],

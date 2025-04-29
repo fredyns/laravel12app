@@ -51,33 +51,27 @@ class Arraying
             return '[' . implode(', ', $array) . ']';
         }
 
-        if (static::areScalars($array)) {
-            $array = array_map(fn($value) => "\"" . addslashes($value) . "\"", $array);
-            $result = implode(', ', $array);
-
-            $limit = 80 - ($indent * static::TAB_SIZE) - 10;
-            if (strlen($result) > $limit) {
-                $childIndent = str_repeat(' ', ($nextIndent + static::TAB_SIZE));
-                $result = $childIndent
-                    . str_replace("\", ", ("\",\n" . $childIndent), $result)
-                    . "\n" . $childIndent;
-            }
-
-            return '[' . $result . ']';
-        }
-
-        $result = "[" . self::newline();
-
+        $lines = [];
+        $charLength = 0;
+        $allScalar = true;
         foreach ($array as $value) {
-            $result .= self::tabs($nextIndent)
-                . self::exportValue($value, $nextIndent) . ","
-                . (self::$inline ? " " : "") // space for inline array
-                . self::newline();
+            $line = self::exportValue($value, $nextIndent);
+            $lines[] = $line;
+            $allScalar = $allScalar && is_scalar($value);
+
+            if (is_scalar($value)) $charLength += strlen($line) + 2; // plus comma & space
         }
 
-        $result .= self::tabs($indent) . "]";
+        $charLimit = 80 - ($indent * self::TAB_SIZE);
+        if ($allScalar && $charLength <= $charLimit) {
+            return '[' . implode(', ', $lines) . ']';
+        }
 
-        return $result;
+        $valueIndent = str_repeat(' ', (($indent + 1) * self::TAB_SIZE));
+        return "[\n"
+            . $valueIndent
+            . implode(",\n" . $valueIndent, $lines) . ",\n"
+            . str_repeat(' ', ($indent * self::TAB_SIZE)) . ']';
     }
 
     protected static function areNumbers(array $array): bool

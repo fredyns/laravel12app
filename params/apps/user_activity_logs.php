@@ -173,7 +173,6 @@ return [
         "type" => "create",
         "uploadPath" => "user_activity_logs/{year}/{id}",
         "rules" => [
-            "id" => ["required", "string"],
             "at" => ["required", "string"],
             "user_id" => ["required", "uuid", "exists:users,id"],
             "title" => ["required", "string"],
@@ -229,7 +228,6 @@ return [
         "type" => "update",
         "uploadPath" => "user_activity_logs/{year}/{id}",
         "rules" => [
-            "id" => ["required", "string"],
             "at" => ["required", "string"],
             "user_id" => ["required", "uuid", "exists:users,id"],
             "title" => ["required", "string"],
@@ -288,38 +286,24 @@ return [
                 "title" => "User Activity Log",
                 "fields" => [
                     "id" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "at" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "user_id" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "title" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "link" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "message" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "i_p_address" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                 ],

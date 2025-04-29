@@ -386,26 +386,26 @@ return [
     "action.index" => [
         "type" => "index",
         "paginate" => 10,
-        "columns" => [       "string",
-       "email",
-       "integer",
-       "decimal",
-       "n_p_w_p",
-       "datetime",
-       "date",
-       "time",
-       "i_p_address",
-       "boolean",
-       "enumerate",
-       "latitude",
-       "longitude"
-       ],
+        "columns" => [
+            "string",
+            "email",
+            "integer",
+            "decimal",
+            "n_p_w_p",
+            "datetime",
+            "date",
+            "time",
+            "i_p_address",
+            "boolean",
+            "enumerate",
+            "latitude",
+            "longitude",
+        ],
     ],
     "action.create" => [
         "type" => "create",
         "uploadPath" => "records/{year}/{id}",
         "rules" => [
-            "id" => ["required", "string"],
             "user_id" => ["nullable", "uuid", "exists:users,id"],
             "string" => ["required", "string"],
             "email" => ["nullable", "string"],
@@ -425,10 +425,6 @@ return [
             "w_y_s_i_w_y_g" => ["nullable", "string"],
             "latitude" => ["nullable", "numeric"],
             "longitude" => ["nullable", "numeric"],
-            "created_at" => ["nullable", "string"],
-            "updated_at" => ["nullable", "string"],
-            "created_by" => ["nullable", "string"],
-            "updated_by" => ["nullable", "string"],
         ],
         "sections" => [
             "general" => [
@@ -537,7 +533,6 @@ return [
         "type" => "update",
         "uploadPath" => "records/{year}/{id}",
         "rules" => [
-            "id" => ["required", "string"],
             "user_id" => ["nullable", "uuid", "exists:users,id"],
             "string" => ["required", "string"],
             "email" => ["nullable", "string"],
@@ -557,10 +552,6 @@ return [
             "w_y_s_i_w_y_g" => ["nullable", "string"],
             "latitude" => ["nullable", "numeric"],
             "longitude" => ["nullable", "numeric"],
-            "created_at" => ["nullable", "string"],
-            "updated_at" => ["nullable", "string"],
-            "created_by" => ["nullable", "string"],
-            "updated_by" => ["nullable", "string"],
         ],
         "sections" => [
             "general" => [
@@ -672,123 +663,75 @@ return [
                 "title" => "Record",
                 "fields" => [
                     "id" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "user_id" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "string" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "email" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "integer" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "decimal" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "n_p_w_p" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "datetime" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "date" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "time" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "i_p_address" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "boolean" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "enumerate" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "text" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "file" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "image" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "markdown_text" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "w_y_s_i_w_y_g" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "latitude" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "longitude" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "created_at" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "updated_at" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "created_by" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "updated_by" => [
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                 ],
