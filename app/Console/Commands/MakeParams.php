@@ -8,9 +8,9 @@ use Snippet\Helpers\Arraying;
 
 class MakeParams extends Command
 {
-    const TABLE_PATH = 'generator/tables';
-    const APP_PATH = 'generator/apps';
-    const MIGRATION_ORDER_PATH = 'generator/migration-order.php';
+    const TABLE_PATH = 'params/tables';
+    const APP_PATH = 'params/apps';
+    const MIGRATION_ORDER_PATH = 'params/migration-order.php';
 
     /**
      * The name and signature of the console command.

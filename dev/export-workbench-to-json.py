@@ -102,5 +102,5 @@ def export_tables_info_to_json(output_file):
 if __name__ == "__main__":
     # Set the output file to the same directory as the script
     script_dir = os.path.dirname(os.path.realpath(__file__))
-    output_file = os.path.join(script_dir, "table_definitions.json")
+    output_file = os.path.join(script_dir, "..", "params", "table_definitions.json")
     export_tables_info_to_json(output_file)

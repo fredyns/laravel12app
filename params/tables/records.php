@@ -203,6 +203,9 @@ return [
             "column" => "user_id",
             "referenced_table" => "users",
             "referenced_column" => "id"
+//                // on relationship
+//                'onUpdate' => 'CASCADE',
+//                'onDelete' => 'CASCADE', // ????
         ]
     ],
     "indices" => [
