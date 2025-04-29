@@ -67,11 +67,9 @@ class Arraying
             return '[' . implode(', ', $lines) . ']';
         }
 
-        $valueIndent = str_repeat(' ', (($indent + 1) * self::TAB_SIZE));
         return "[\n"
-            . $valueIndent
-            . implode(",\n" . $valueIndent, $lines) . ",\n"
-            . str_repeat(' ', ($indent * self::TAB_SIZE)) . ']';
+            . self::tabs($indent + 1) . implode(",\n" . self::tabs($indent + 1), $lines) . ",\n"
+            . self::tabs($indent) . ']';
     }
 
     protected static function areNumbers(array $array): bool
