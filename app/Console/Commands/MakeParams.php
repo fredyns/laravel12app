@@ -82,7 +82,7 @@ class MakeParams extends Command
             ];
         }
 
-        $param = array_merge_recursive($param, $this->generateParam($table));
+        $param = array_merge($param, $this->generateParam($table));
 
         $this->saveParam($param, $tableName);
     }
@@ -241,7 +241,7 @@ class MakeParams extends Command
             ],
         ];
 
-        return array_merge_recursive($table, $addon);
+        return array_merge($table, $addon);
     }
 
     /**
