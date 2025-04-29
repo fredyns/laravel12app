@@ -56,6 +56,9 @@ class Arraying
         }
 
         $result .= self::tabs($indent) . "]";
+
+        if (self::$inline) $result = trim($result, " ,");
+
         return $result;
     }
 
