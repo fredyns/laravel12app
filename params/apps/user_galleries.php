@@ -1,5 +1,6 @@
 <?php
 return [
+    "migrationPrefix" => "2025_04_29_075641",
     "name" => "user_galleries",
     "columns" => [
         [
@@ -98,6 +99,38 @@ return [
             "id",
         ],
     ],
+    "lang.en" => [
+        "name" => "User Galleries",
+        "index_title" => "User Galleries List",
+        "new_title" => "New User Gallery",
+        "create_title" => "Add User Gallery",
+        "edit_title" => "Edit User Gallery",
+        "show_title" => "Show User Gallery",
+        "columns" => [
+            "user_id" => "User",
+            "string" => "String",
+        ],
+        "fields" => [
+            "user_id" => "User",
+            "string" => "String",
+        ],
+    ],
+    "lang.id" => [
+        "name" => "User Galleries",
+        "index_title" => "Tabel User Galleries",
+        "new_title" => "Tambah User Gallery",
+        "create_title" => "Tambah User Gallery",
+        "edit_title" => "Edit User Gallery",
+        "show_title" => "Lihat User Gallery",
+        "columns" => [
+            "user_id" => "User",
+            "string" => "String",
+        ],
+        "fields" => [
+            "user_id" => "User",
+            "string" => "String",
+        ],
+    ],
     "faker" => [
         "id" => NULL,
         "at" => NULL,
@@ -109,93 +142,128 @@ return [
         "metadata" => NULL,
     ],
     "seeder" => 10,
-    "modelName" => "UserGalleries",
+    "modelName" => "UserGallery",
     "route" => "user-galleries",
-    "controllerName" => "UserGalleriesController",
+    "controllerName" => "UserGalleryController",
     "viewFolder" => "user_galleries",
-    "index" => [
+    "policy" => [
+        "index" => "table.index",
+        "view" => "table.show",
+        "create" => "table.create",
+        "update" => "table.update",
+        "delete" => "table.delete",
+        "restore" => FALSE,
+        "forceDelete" => FALSE,
+    ],
+    "action.index" => [
+        "type" => "index",
         "paginate" => 10,
         "columns" => [
             "name",
             "type",
         ],
     ],
-    "form" => [
-        "fields" => [
-            "id" => [
-                "type" => "text",
-                "config" => [
-                    "required" => TRUE,
-                ],
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+    "action.create" => [
+        "type" => "create",
+        "uploadPath" => "user_galleries/{year}/{id}",
+        "rules" => [
+            [
+                "required",
             ],
-            "at" => [
-                "type" => "text",
-                "config" => [
-                    "required" => TRUE,
-                ],
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "required",
             ],
-            "user_id" => [
-                "type" => "select",
-                "config" => [
-                    "model" => "App\\Models\\Users",
-                    "key" => "id",
-                    "label" => "name",
-                    "required" => TRUE,
-                ],
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "required",
+                "uuid",
+                "exists:users,id",
             ],
-            "file" => [
-                "type" => "image",
-                "config" => [
-                    "image" => "jpg,jpeg,png",
-                    "required" => TRUE,
-                ],
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "required",
+                "string",
+                "image",
+                "extensions:jpg,png",
             ],
-            "name" => [
-                "type" => "text",
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "nullable",
+                "string",
             ],
-            "description" => [
-                "type" => "textarea",
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "nullable",
+                "string",
             ],
-            "type" => [
-                "type" => "text",
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "nullable",
+                "string",
             ],
-            "metadata" => [
-                "type" => "text",
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "nullable",
             ],
         ],
-        "uploadPath" => "user_galleries",
-        "rules" => [],
-    ],
-    "show" => [
-        "cards" => [
+        "sections" => [
             "general" => [
-                "title" => "Model",
+                "title" => "User Gallery",
                 "fields" => [
-                    "field-name" => [
+                    "id" => [
+                        "type" => "text",
+                        "config" => [
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "at" => [
+                        "type" => "text",
+                        "config" => [
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "user_id" => [
+                        "type" => "select",
+                        "config" => [
+                            "model" => "App\\Models\\Users",
+                            "key" => "id",
+                            "label" => "name",
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "file" => [
+                        "type" => "image",
+                        "config" => [
+                            "image" => "jpg,jpeg,png",
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "name" => [
+                        "type" => "text",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "description" => [
+                        "type" => "textarea",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "type" => [
+                        "type" => "text",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "metadata" => [
+                        "type" => "text",
                         "col" => "full",
                         "col-md" => "full",
                         "col-lg" => "full",
@@ -204,30 +272,163 @@ return [
             ],
         ],
     ],
-    "policy" => [
-        "viewAny" => "table.index",
-        "view" => "table.show",
-        "create" => "table.create",
-        "update" => "table.update",
-        "delete" => "table.delete",
-        "deleteAny" => "table.delete",
-        "restore" => FALSE,
-        "forceDelete" => FALSE,
-    ],
-    "lang" => [
-        "name" => "Records",
-        "index_title" => "Records List",
-        "new_title" => "New Record",
-        "create_title" => "Create Record",
-        "edit_title" => "Edit Record",
-        "show_title" => "Show Record",
-        "columns" => [
-            "user_id" => "User",
-            "string" => "String",
+    "action.update" => [
+        "type" => "update",
+        "uploadPath" => "user_galleries/{year}/{id}",
+        "rules" => [
+            [
+                "required",
+            ],
+            [
+                "required",
+            ],
+            [
+                "required",
+                "uuid",
+                "exists:users,id",
+            ],
+            [
+                "required",
+                "string",
+                "image",
+                "extensions:jpg,png",
+            ],
+            [
+                "nullable",
+                "string",
+            ],
+            [
+                "nullable",
+                "string",
+            ],
+            [
+                "nullable",
+                "string",
+            ],
+            [
+                "nullable",
+            ],
         ],
-        "fields" => [
-            "user_id" => "User",
-            "string" => "String",
+        "sections" => [
+            "general" => [
+                "title" => "User Gallery",
+                "fields" => [
+                    "id" => [
+                        "type" => "text",
+                        "config" => [
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "at" => [
+                        "type" => "text",
+                        "config" => [
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "user_id" => [
+                        "type" => "select",
+                        "config" => [
+                            "model" => "App\\Models\\Users",
+                            "key" => "id",
+                            "label" => "name",
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "file" => [
+                        "type" => "image",
+                        "config" => [
+                            "image" => "jpg,jpeg,png",
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "name" => [
+                        "type" => "text",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "description" => [
+                        "type" => "textarea",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "type" => [
+                        "type" => "text",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "metadata" => [
+                        "type" => "text",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                ],
+            ],
+        ],
+    ],
+    "action.show" => [
+        "type" => "show",
+        "sections" => [
+            "general" => [
+                "title" => "User Gallery",
+                "fields" => [
+                    "id" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "at" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "user_id" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "file" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "name" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "description" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "type" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "metadata" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                ],
+            ],
         ],
     ],
 ];

@@ -1,5 +1,6 @@
 <?php
 return [
+    "migrationPrefix" => "2025_04_29_075641",
     "name" => "image_resizing_queues",
     "columns" => [
         [
@@ -67,7 +68,7 @@ return [
             "default" => NULL,
         ],
     ],
-    "foreignKeys" => [],
+    "foreignKeys" =>     [],
     "indices" => [
         [
             "name" => "created_at",
@@ -90,6 +91,38 @@ return [
             "id",
         ],
     ],
+    "lang.en" => [
+        "name" => "Image Resizing Queues",
+        "index_title" => "Image Resizing Queues List",
+        "new_title" => "New Image Resizing Queue",
+        "create_title" => "Add Image Resizing Queue",
+        "edit_title" => "Edit Image Resizing Queue",
+        "show_title" => "Show Image Resizing Queue",
+        "columns" => [
+            "user_id" => "User",
+            "string" => "String",
+        ],
+        "fields" => [
+            "user_id" => "User",
+            "string" => "String",
+        ],
+    ],
+    "lang.id" => [
+        "name" => "Image Resizing Queues",
+        "index_title" => "Tabel Image Resizing Queues",
+        "new_title" => "Tambah Image Resizing Queue",
+        "create_title" => "Tambah Image Resizing Queue",
+        "edit_title" => "Edit Image Resizing Queue",
+        "show_title" => "Lihat Image Resizing Queue",
+        "columns" => [
+            "user_id" => "User",
+            "string" => "String",
+        ],
+        "fields" => [
+            "user_id" => "User",
+            "string" => "String",
+        ],
+    ],
     "faker" => [
         "id" => NULL,
         "created_at" => NULL,
@@ -101,97 +134,135 @@ return [
         "metadata" => NULL,
     ],
     "seeder" => 10,
-    "modelName" => "ImageResizingQueues",
+    "modelName" => "ImageResizingQueue",
     "route" => "image-resizing-queues",
-    "controllerName" => "ImageResizingQueuesController",
+    "controllerName" => "ImageResizingQueueController",
     "viewFolder" => "image_resizing_queues",
-    "index" => [
+    "policy" => [
+        "index" => "table.index",
+        "view" => "table.show",
+        "create" => "table.create",
+        "update" => "table.update",
+        "delete" => "table.delete",
+        "restore" => FALSE,
+        "forceDelete" => FALSE,
+    ],
+    "action.index" => [
+        "type" => "index",
         "paginate" => 10,
         "columns" => [
             "width",
             "height",
         ],
     ],
-    "form" => [
-        "fields" => [
-            "id" => [
-                "type" => "text",
-                "config" => [
-                    "required" => TRUE,
-                ],
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+    "action.create" => [
+        "type" => "create",
+        "uploadPath" => "image_resizing_queues/{year}/{id}",
+        "rules" => [
+            [
+                "required",
             ],
-            "created_at" => [
-                "type" => "text",
-                "config" => [
-                    "required" => TRUE,
-                ],
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "required",
             ],
-            "source" => [
-                "type" => "image",
-                "config" => [
-                    "image" => "jpg,jpeg,png",
-                    "required" => TRUE,
-                ],
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "required",
+                "string",
+                "image",
+                "extensions:jpg,png",
             ],
-            "save_as" => [
-                "type" => "image",
-                "config" => [
-                    "image" => "jpg,jpeg,png",
-                    "required" => TRUE,
-                ],
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "required",
+                "string",
+                "image",
+                "extensions:jpg,png",
             ],
-            "width" => [
-                "type" => "number",
-                "config" => [
-                    "min" => 64,
-                ],
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "nullable",
+                "numeric",
+                "min:64",
             ],
-            "height" => [
-                "type" => "number",
-                "config" => [
-                    "min" => 64,
-                ],
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "nullable",
+                "numeric",
+                "min:64",
             ],
-            "remark" => [
-                "type" => "textarea",
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "nullable",
+                "string",
             ],
-            "metadata" => [
-                "type" => "text",
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "nullable",
             ],
         ],
-        "uploadPath" => "image_resizing_queues",
-        "rules" => [],
-    ],
-    "show" => [
-        "cards" => [
+        "sections" => [
             "general" => [
-                "title" => "Model",
+                "title" => "Image Resizing Queue",
                 "fields" => [
-                    "field-name" => [
+                    "id" => [
+                        "type" => "text",
+                        "config" => [
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "created_at" => [
+                        "type" => "text",
+                        "config" => [
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "source" => [
+                        "type" => "image",
+                        "config" => [
+                            "image" => "jpg,jpeg,png",
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "save_as" => [
+                        "type" => "image",
+                        "config" => [
+                            "image" => "jpg,jpeg,png",
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "width" => [
+                        "type" => "number",
+                        "config" => [
+                            "min" => 64,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "height" => [
+                        "type" => "number",
+                        "config" => [
+                            "min" => 64,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "remark" => [
+                        "type" => "textarea",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "metadata" => [
+                        "type" => "text",
                         "col" => "full",
                         "col-md" => "full",
                         "col-lg" => "full",
@@ -200,30 +271,170 @@ return [
             ],
         ],
     ],
-    "policy" => [
-        "viewAny" => "table.index",
-        "view" => "table.show",
-        "create" => "table.create",
-        "update" => "table.update",
-        "delete" => "table.delete",
-        "deleteAny" => "table.delete",
-        "restore" => FALSE,
-        "forceDelete" => FALSE,
-    ],
-    "lang" => [
-        "name" => "Records",
-        "index_title" => "Records List",
-        "new_title" => "New Record",
-        "create_title" => "Create Record",
-        "edit_title" => "Edit Record",
-        "show_title" => "Show Record",
-        "columns" => [
-            "user_id" => "User",
-            "string" => "String",
+    "action.update" => [
+        "type" => "update",
+        "uploadPath" => "image_resizing_queues/{year}/{id}",
+        "rules" => [
+            [
+                "required",
+            ],
+            [
+                "required",
+            ],
+            [
+                "required",
+                "string",
+                "image",
+                "extensions:jpg,png",
+            ],
+            [
+                "required",
+                "string",
+                "image",
+                "extensions:jpg,png",
+            ],
+            [
+                "nullable",
+                "numeric",
+                "min:64",
+            ],
+            [
+                "nullable",
+                "numeric",
+                "min:64",
+            ],
+            [
+                "nullable",
+                "string",
+            ],
+            [
+                "nullable",
+            ],
         ],
-        "fields" => [
-            "user_id" => "User",
-            "string" => "String",
+        "sections" => [
+            "general" => [
+                "title" => "Image Resizing Queue",
+                "fields" => [
+                    "id" => [
+                        "type" => "text",
+                        "config" => [
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "created_at" => [
+                        "type" => "text",
+                        "config" => [
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "source" => [
+                        "type" => "image",
+                        "config" => [
+                            "image" => "jpg,jpeg,png",
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "save_as" => [
+                        "type" => "image",
+                        "config" => [
+                            "image" => "jpg,jpeg,png",
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "width" => [
+                        "type" => "number",
+                        "config" => [
+                            "min" => 64,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "height" => [
+                        "type" => "number",
+                        "config" => [
+                            "min" => 64,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "remark" => [
+                        "type" => "textarea",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "metadata" => [
+                        "type" => "text",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                ],
+            ],
+        ],
+    ],
+    "action.show" => [
+        "type" => "show",
+        "sections" => [
+            "general" => [
+                "title" => "Image Resizing Queue",
+                "fields" => [
+                    "id" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "created_at" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "source" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "save_as" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "width" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "height" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "remark" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "metadata" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                ],
+            ],
         ],
     ],
 ];

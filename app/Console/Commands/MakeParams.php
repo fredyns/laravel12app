@@ -5,12 +5,12 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 use Snippet\Helpers\Arraying;
+use Snippet\Helpers\NPWP;
 
 class MakeParams extends Command
 {
     const TABLE_PATH = 'params/tables';
     const APP_PATH = 'params/apps';
-    const MIGRATION_ORDER_PATH = 'params/migration-order.php';
 
     /**
      * The name and signature of the console command.
@@ -27,16 +27,6 @@ class MakeParams extends Command
     protected $description = 'Create parameters for app generator';
 
     /**
-     * mark prefix for each table migration
-     * format: [
-     *              table-name => prefix
-     *          ]
-     *
-     * @var array
-     */
-    protected $migrationOrder = [];
-
-    /**
      * Execute the console command.
      */
     public function handle()
@@ -45,9 +35,7 @@ class MakeParams extends Command
             mkdir(self::APP_PATH, 0775, true);
         }
 
-        $this->loadMigrationOrder();
-
-        $tables = $this->tables();
+        $tables = iterator_to_array($this->tables());
         if (empty($tables)) {
             $this->error('Table parameters not found');
             return;
@@ -55,21 +43,6 @@ class MakeParams extends Command
 
         foreach ($tables as $table) {
             $this->parseTable($table);
-        }
-
-        $this->saveMigrationOrder();
-    }
-
-    protected function loadMigrationOrder()
-    {
-        $path = base_path(self::MIGRATION_ORDER_PATH);
-        if (!file_exists($path)) {
-            return;
-        }
-
-        $order = include $path;
-        if (!empty($order) && is_array($order)) {
-            $this->migrationOrder = $order;
         }
     }
 
@@ -97,16 +70,16 @@ class MakeParams extends Command
          *  2. exist but invalid
          *     job: - regenerate for update
          *  3. new, not exist yet
-         *     job: - put to migration order
-         *          - regenerate for new creation
+         *     job: - regenerate for new creation
          */
 
         $path = base_path(self::APP_PATH . '/' . $tableName . '.php');
         if (file_exists($path)) {
             $param = $this->loadApp($path);
         } else {
-            $this->addMigrationOrder($tableName);
-            $param = [];
+            $param = [
+                'migrationPrefix' => date('Y_m_d_His'),
+            ];
         }
 
         $param = array_merge_recursive($param, $this->generateParam($table));
@@ -146,11 +119,6 @@ class MakeParams extends Command
         }
     }
 
-    protected function addMigrationOrder($tableName)
-    {
-        $this->migrationOrder[$tableName] = date('Y_m_d_His');
-    }
-
     /**
      * load app parameters, if any
      * @param $tableName
@@ -175,65 +143,92 @@ class MakeParams extends Command
 
     protected function generateParam($table)
     {
-        $studlyName = Str::studly($table['name']);
+        $nameWithSpace = str_replace('_', ' ', $table['name']);
+        $namePlural = Str::title($nameWithSpace);
+        $nameSingular = Str::singular($namePlural);
+        $nameStudly = Str::studly($nameSingular);
+        $nameSnake = Str::snake($nameWithSpace);
+        $nameSlug = Str::slug($nameWithSpace);
         $addon = [
-            // migration directly parsing columns params
+            // lang
+            'lang.en' => [
+                'name' => $namePlural,
+                'index_title' => $namePlural . ' List',
+                'new_title' => 'New ' . $nameSingular,
+                'create_title' => 'Add ' . $nameSingular,
+                'edit_title' => 'Edit ' . $nameSingular,
+                'show_title' => 'Show ' . $nameSingular,
+                'columns' => $this->labelParams($table),
+                'fields' => $this->labelParams($table),
+            ],
+            'lang.id' => [
+                'name' => $namePlural,
+                'index_title' => 'Tabel ' . $namePlural,
+                'new_title' => 'Tambah ' . $nameSingular,
+                'create_title' => 'Tambah ' . $nameSingular,
+                'edit_title' => 'Edit ' . $nameSingular,
+                'show_title' => 'Lihat ' . $nameSingular,
+                'columns' => $this->labelParams($table),
+                'fields' => $this->labelParams($table),
+            ],
             // faker
             'faker' => iterator_to_array($this->fakerParams($table)),
             // seeder
             'seeder' => 10,
             // model
-            'modelName' => $studlyName,
+            'modelName' => $nameStudly,
             // routes
-            'route' => Str::slug($table['name']),
+            'route' => $nameSlug,
             // controller
-            'controllerName' => $studlyName . 'Controller',
-            'viewFolder' => Str::snake($table['name']),
-            // index action
-            'index' => [
-                'paginate' => 10,
-                'columns' => iterator_to_array($this->columnParams($table)), // displayed on table
-                // 'extraSelect' => [], // optional
-            ],
-            // create & update action
-            'form' => [
-                'fields' => iterator_to_array($this->inputParams($table)),
-                'uploadPath' => $table['name'],
-                'rules' => [
-                    // todo: sampe siniiiiiiiiiiiii
-                    //todo: rules
-                ],
-            ],
-            // show action
-            'show' => [
-                'cards' => [
-                    'general' => [
-                        'title' => 'Model',
-                        'fields' => ($this->detailsParams($table)),
-                    ],
-                ],
-            ],
+            'controllerName' => $nameStudly . 'Controller',
+            'viewFolder' => $nameSnake,
             // policy
             'policy' => [
-                'viewAny' => 'table.index',
+                'index' => 'table.index',
                 'view' => 'table.show',
                 'create' => 'table.create',
                 'update' => 'table.update',
                 'delete' => 'table.delete',
-                'deleteAny' => 'table.delete',
                 'restore' => false,
                 'forceDelete' => false,
             ],
-            // lang
-            'lang' => [
-                'name' => 'Records',
-                'index_title' => 'Records List',
-                'new_title' => 'New Record',
-                'create_title' => 'Create Record',
-                'edit_title' => 'Edit Record',
-                'show_title' => 'Show Record',
-                'columns' => $this->labelParams($table),
-                'fields' => $this->labelParams($table),
+            // actions
+            'action.index' => [
+                'type' => 'index',
+                'paginate' => 10,
+                'columns' => iterator_to_array($this->columnParams($table)), // displayed on table
+                // 'extraSelect' => [], // optional
+            ],
+            'action.create' => [
+                'type' => 'create',
+                'uploadPath' => "{$table['name']}/{year}/{id}",
+                'rules' => iterator_to_array($this->ruleParams($table)),
+                'sections' => [
+                    'general' => [
+                        'title' => $nameSingular,
+                        'fields' => iterator_to_array($this->inputParams($table)),
+                    ],
+                ],
+            ],
+            'action.update' => [
+                'type' => 'update',
+                'uploadPath' => "{$table['name']}/{year}/{id}",
+                'rules' => iterator_to_array($this->ruleParams($table)),
+                'sections' => [
+                    'general' => [
+                        'title' => $nameSingular,
+                        'fields' => iterator_to_array($this->inputParams($table)),
+                    ],
+                ],
+            ],
+            'action.show' => [
+                'type' => 'show',
+                'sections' => [
+                    'general' => [
+                        'title' => $nameSingular,
+                        'fields' => iterator_to_array($this->detailParams($table)),
+                    ],
+                ],
             ],
         ];
 
@@ -277,7 +272,10 @@ class MakeParams extends Command
                 return null;
 
             case 'VARCHAR':
-                if (str_contains($column['name'], 'name')) {
+                if ($this->isNPWP($column['name'])) {
+                    $format = str_replace('9', '#', NPWP::FORMAT);
+                    return "numerify('{$format}')";
+                } else if (str_contains($column['name'], 'name')) {
                     return 'firstName()';
                 } else if (str_contains($column['name'], 'number')) {
                     return 'phoneNumber()';
@@ -290,6 +288,8 @@ class MakeParams extends Command
                 }
             case 'INT':
             case 'BIGINT':
+                if ($this->isNPWP($column['name'])) return 'randomNumber(15, true)';
+
                 return 'randomNumber(5, true)';
 
             case 'TINYINT':
@@ -302,7 +302,7 @@ class MakeParams extends Command
             case 'DECIMAL':
             case 'FLOAT':
             case 'DOUBLE':
-                return 'randomFloat(5, true)';
+                return 'randomFloat()';
 
             case 'DATETIME':
             case 'DATE':
@@ -337,6 +337,11 @@ class MakeParams extends Command
             default:
                 return null;
         }
+    }
+
+    protected function isNPWP($columnName)
+    {
+        return str_contains($columnName, 'npwp') or str_contains($columnName, 'n_p_w_p');
     }
 
     protected function columnParams($table)
@@ -394,6 +399,68 @@ class MakeParams extends Command
 //                'col-lg' => 'full', // optional
 //            ],
 //        ];
+    }
+
+    protected function ruleParams($table)
+    {
+        $foreignKeys = $table['foreignKeys'] ?? [];
+        foreach ($table['columns'] as $column) {
+            yield $column['name'] = iterator_to_array($this->ruleParam($column, $foreignKeys));
+        }
+    }
+
+    protected function ruleParam($column, $foreignKeys)
+    {
+        $name = $column['name'] ?? '-';
+        $type = $column['type'] ?? 'VARCHAR';
+
+        if ($column['nullable'] ?? false) {
+            yield 'nullable';
+        } else {
+            yield 'required';
+        }
+
+        $numeric = ['TINYINT', 'INT', 'BIGINT', 'DECIMAL', 'FLOAT', 'DOUBLE'];
+        if (in_array($type, $numeric)) yield 'numeric';
+
+        $string = ['VARCHAR', 'TEXT'];
+        if (in_array($type, $string)) yield 'string';
+
+        if ($type === 'DATETIME') yield 'date';
+        if ($type === 'TIME') yield 'date_format:H:i';
+        if ($type === 'ENUM' && isset($column['options'])) yield 'in:' . implode(',', $column['options']);
+
+        if ($column['config']['uuid'] ?? false) yield 'uuid';
+        if ($column['config']['email'] ?? false) yield 'email';
+        if ($column['config']['ipaddress'] ?? false) yield 'ip';
+
+        if ($column['config']['url'] ?? false) {
+            yield 'url:http,https';
+        }
+        if ($column['config']['file'] ?? false) {
+            yield 'file';
+            yield 'extensions:pdf,docx,xlsx,pptx,jpg,png,zip,rar';
+        }
+        if ($column['config']['image'] ?? false) {
+            yield 'image';
+            yield 'extensions:jpg,png';
+        }
+
+        $rule1 = [
+            'min', 'max', 'decimal',
+            'lt', 'lte', 'gt', 'gte',
+            'same', 'size', 'min_digits', 'regex',
+            'after', 'before', 'after_or_equal', 'before_or_equal', 'date_equals', 'date_format',
+            'dimensions',
+        ];
+        foreach ($rule1 as $rule) {
+            if (isset($column['config'][$rule])) yield $rule . ':' . $column['config'][$rule];
+        }
+
+        // relationship
+        if (isset($foreignKeys[$name]['referenced_table']) && isset($foreignKeys[$name]['referenced_column'])) {
+            yield 'exists:' . $foreignKeys[$name]['referenced_table'] . "," . $foreignKeys[$name]['referenced_column'];
+        }
     }
 
     protected function selectParam($column, $foreignKey)
@@ -525,15 +592,19 @@ class MakeParams extends Command
         }
     }
 
-    protected function detailsParams($table)
+    protected function detailParams($table)
+    {
+        foreach ($table['columns'] as $column) {
+            yield $column['name'] => $this->detailParam($column);
+        }
+    }
+
+    protected function detailParam($column): array
     {
         return [
-            // todo: generate input to show
-            'field-name' => [
-                'col' => 'full',
-                'col-md' => 'full', // optional
-                'col-lg' => 'full', // optional
-            ],
+            'col' => 'full',
+            'col-md' => 'full',
+            'col-lg' => 'full',
         ];
     }
 
@@ -550,10 +621,4 @@ class MakeParams extends Command
     {
         Arraying::saveToFile($param, self::APP_PATH . '/' . $tableName . '.php');
     }
-
-    protected function saveMigrationOrder()
-    {
-        Arraying::saveToFile($this->migrationOrder, self::MIGRATION_ORDER_PATH);
-    }
-
 }

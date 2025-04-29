@@ -1,5 +1,6 @@
 <?php
 return [
+    "migrationPrefix" => "2025_04_29_075641",
     "name" => "user_activity_logs",
     "columns" => [
         [
@@ -96,6 +97,38 @@ return [
             "id",
         ],
     ],
+    "lang.en" => [
+        "name" => "User Activity Logs",
+        "index_title" => "User Activity Logs List",
+        "new_title" => "New User Activity Log",
+        "create_title" => "Add User Activity Log",
+        "edit_title" => "Edit User Activity Log",
+        "show_title" => "Show User Activity Log",
+        "columns" => [
+            "user_id" => "User",
+            "string" => "String",
+        ],
+        "fields" => [
+            "user_id" => "User",
+            "string" => "String",
+        ],
+    ],
+    "lang.id" => [
+        "name" => "User Activity Logs",
+        "index_title" => "Tabel User Activity Logs",
+        "new_title" => "Tambah User Activity Log",
+        "create_title" => "Tambah User Activity Log",
+        "edit_title" => "Edit User Activity Log",
+        "show_title" => "Lihat User Activity Log",
+        "columns" => [
+            "user_id" => "User",
+            "string" => "String",
+        ],
+        "fields" => [
+            "user_id" => "User",
+            "string" => "String",
+        ],
+    ],
     "faker" => [
         "id" => NULL,
         "at" => NULL,
@@ -106,86 +139,118 @@ return [
         "i_p_address" => "localIpv4()",
     ],
     "seeder" => 10,
-    "modelName" => "UserActivityLogs",
+    "modelName" => "UserActivityLog",
     "route" => "user-activity-logs",
-    "controllerName" => "UserActivityLogsController",
+    "controllerName" => "UserActivityLogController",
     "viewFolder" => "user_activity_logs",
-    "index" => [
+    "policy" => [
+        "index" => "table.index",
+        "view" => "table.show",
+        "create" => "table.create",
+        "update" => "table.update",
+        "delete" => "table.delete",
+        "restore" => FALSE,
+        "forceDelete" => FALSE,
+    ],
+    "action.index" => [
+        "type" => "index",
         "paginate" => 10,
         "columns" => [
             "title",
             "i_p_address",
         ],
     ],
-    "form" => [
-        "fields" => [
-            "id" => [
-                "type" => "text",
-                "config" => [
-                    "required" => TRUE,
-                ],
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+    "action.create" => [
+        "type" => "create",
+        "uploadPath" => "user_activity_logs/{year}/{id}",
+        "rules" => [
+            [
+                "required",
             ],
-            "at" => [
-                "type" => "text",
-                "config" => [
-                    "required" => TRUE,
-                ],
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "required",
             ],
-            "user_id" => [
-                "type" => "select",
-                "config" => [
-                    "model" => "App\\Models\\Users",
-                    "key" => "id",
-                    "label" => "name",
-                    "required" => TRUE,
-                ],
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "required",
+                "uuid",
+                "exists:users,id",
             ],
-            "title" => [
-                "type" => "text",
-                "config" => [
-                    "required" => TRUE,
-                ],
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "required",
+                "string",
             ],
-            "link" => [
-                "type" => "textarea",
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "nullable",
+                "string",
+                "url:http,https",
             ],
-            "message" => [
-                "type" => "textarea",
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "nullable",
+                "string",
             ],
-            "i_p_address" => [
-                "type" => "ipaddress",
-                "col" => "full",
-                "col-md" => "full",
-                "col-lg" => "full",
+            [
+                "nullable",
+                "string",
+                "ip",
             ],
         ],
-        "uploadPath" => "user_activity_logs",
-        "rules" => [],
-    ],
-    "show" => [
-        "cards" => [
+        "sections" => [
             "general" => [
-                "title" => "Model",
+                "title" => "User Activity Log",
                 "fields" => [
-                    "field-name" => [
+                    "id" => [
+                        "type" => "text",
+                        "config" => [
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "at" => [
+                        "type" => "text",
+                        "config" => [
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "user_id" => [
+                        "type" => "select",
+                        "config" => [
+                            "model" => "App\\Models\\Users",
+                            "key" => "id",
+                            "label" => "name",
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "title" => [
+                        "type" => "text",
+                        "config" => [
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "link" => [
+                        "type" => "textarea",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "message" => [
+                        "type" => "textarea",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "i_p_address" => [
+                        "type" => "ipaddress",
                         "col" => "full",
                         "col-md" => "full",
                         "col-lg" => "full",
@@ -194,30 +259,148 @@ return [
             ],
         ],
     ],
-    "policy" => [
-        "viewAny" => "table.index",
-        "view" => "table.show",
-        "create" => "table.create",
-        "update" => "table.update",
-        "delete" => "table.delete",
-        "deleteAny" => "table.delete",
-        "restore" => FALSE,
-        "forceDelete" => FALSE,
-    ],
-    "lang" => [
-        "name" => "Records",
-        "index_title" => "Records List",
-        "new_title" => "New Record",
-        "create_title" => "Create Record",
-        "edit_title" => "Edit Record",
-        "show_title" => "Show Record",
-        "columns" => [
-            "user_id" => "User",
-            "string" => "String",
+    "action.update" => [
+        "type" => "update",
+        "uploadPath" => "user_activity_logs/{year}/{id}",
+        "rules" => [
+            [
+                "required",
+            ],
+            [
+                "required",
+            ],
+            [
+                "required",
+                "uuid",
+                "exists:users,id",
+            ],
+            [
+                "required",
+                "string",
+            ],
+            [
+                "nullable",
+                "string",
+                "url:http,https",
+            ],
+            [
+                "nullable",
+                "string",
+            ],
+            [
+                "nullable",
+                "string",
+                "ip",
+            ],
         ],
-        "fields" => [
-            "user_id" => "User",
-            "string" => "String",
+        "sections" => [
+            "general" => [
+                "title" => "User Activity Log",
+                "fields" => [
+                    "id" => [
+                        "type" => "text",
+                        "config" => [
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "at" => [
+                        "type" => "text",
+                        "config" => [
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "user_id" => [
+                        "type" => "select",
+                        "config" => [
+                            "model" => "App\\Models\\Users",
+                            "key" => "id",
+                            "label" => "name",
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "title" => [
+                        "type" => "text",
+                        "config" => [
+                            "required" => TRUE,
+                        ],
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "link" => [
+                        "type" => "textarea",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "message" => [
+                        "type" => "textarea",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "i_p_address" => [
+                        "type" => "ipaddress",
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                ],
+            ],
+        ],
+    ],
+    "action.show" => [
+        "type" => "show",
+        "sections" => [
+            "general" => [
+                "title" => "User Activity Log",
+                "fields" => [
+                    "id" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "at" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "user_id" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "title" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "link" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "message" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                    "i_p_address" => [
+                        "col" => "full",
+                        "col-md" => "full",
+                        "col-lg" => "full",
+                    ],
+                ],
+            ],
         ],
     ],
 ];
