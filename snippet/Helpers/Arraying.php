@@ -35,7 +35,7 @@ class Arraying
         }
 
         if (!is_array($array) or empty($array)) {
-            return self::tabs($indent) . '[]';
+            return '[]';
         }
 
         return (array_is_list($array)) ?

@@ -68,7 +68,7 @@ return [
             "default" => NULL,
         ],
     ],
-    "foreignKeys" => [], //todo: cek kelebihan spasi  di awal
+    "foreignKeys" => [],
     "indices" => [
         [
             "name" => "created_at",
