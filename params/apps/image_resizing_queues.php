@@ -68,28 +68,22 @@ return [
             "default" => NULL,
         ],
     ],
-    "foreignKeys" => [],
+    "foreignKeys" => [], //todo: cek kelebihan spasi  di awal
     "indices" => [
         [
             "name" => "created_at",
-            "columns" => [
-                "created_at",
-            ],
+            "columns" => ["created_at"],
             "unique" => 0,
         ],
         [
             "name" => "PRIMARY",
-            "columns" => [
-                "id",
-            ],
+            "columns" => ["id"],
             "unique" => 0,
         ],
     ],
     "primaryKey" => [
         "name" => "PRIMARY",
-        "columns" => [
-            "id",
-        ],
+        "columns" => ["id"],
     ],
     "lang.en" => [
         "name" => "Image Resizing Queues",
@@ -150,56 +144,27 @@ return [
     "action.index" => [
         "type" => "index",
         "paginate" => 10,
-        "columns" => [
-            "width",
-            "height",
-        ],
+        "columns" => ["width", "height"],//todo: kenapa source gamasuk?
     ],
     "action.create" => [
         "type" => "create",
         "uploadPath" => "image_resizing_queues/{year}/{id}",
         "rules" => [
-            [
-                "required",
-            ],
-            [
-                "required",
-            ],
-            [
-                "required",
-                "string",
-                "image",
-                "extensions:jpg,png",
-            ],
-            [
-                "required",
-                "string",
-                "image",
-                "extensions:jpg,png",
-            ],
-            [
-                "nullable",
-                "numeric",
-                "min:64",
-            ],
-            [
-                "nullable",
-                "numeric",
-                "min:64",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-            ],
+            //todo: nama kolom gamasuk
+            ["required"],
+            ["required"],
+            ["required", "string", "image", "extensions:jpg,png"],
+            ["required", "string", "image", "extensions:jpg,png"],
+            ["nullable", "numeric", "min:64"],
+            ["nullable", "numeric", "min:64"],
+            ["nullable", "string"],
+            ["nullable"],//todo: null doank tipenya apa?
         ],
         "sections" => [
             "general" => [
                 "title" => "Image Resizing Queue",
                 "fields" => [
-                    "id" => [
+                    "id" => [// todo: PK mustinya diskip
                         "type" => "text",
                         "config" => [
                             "required" => TRUE,
@@ -208,7 +173,7 @@ return [
                         "col-md" => "full",
                         "col-lg" => "full",
                     ],
-                    "created_at" => [
+                    "created_at" => [// todo: kolom sistem diskip aja
                         "type" => "text",
                         "config" => [
                             "required" => TRUE,
@@ -261,7 +226,7 @@ return [
                         "col-md" => "full",
                         "col-lg" => "full",
                     ],
-                    "metadata" => [
+                    "metadata" => [//todo: ini jg kolom sistem
                         "type" => "text",
                         "col" => "full",
                         "col-md" => "full",
@@ -275,41 +240,14 @@ return [
         "type" => "update",
         "uploadPath" => "image_resizing_queues/{year}/{id}",
         "rules" => [
-            [
-                "required",
-            ],
-            [
-                "required",
-            ],
-            [
-                "required",
-                "string",
-                "image",
-                "extensions:jpg,png",
-            ],
-            [
-                "required",
-                "string",
-                "image",
-                "extensions:jpg,png",
-            ],
-            [
-                "nullable",
-                "numeric",
-                "min:64",
-            ],
-            [
-                "nullable",
-                "numeric",
-                "min:64",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-            ],
+            ["required"],
+            ["required"],
+            ["required", "string", "image", "extensions:jpg,png"],
+            ["required", "string", "image", "extensions:jpg,png"],
+            ["nullable", "numeric", "min:64"],
+            ["nullable", "numeric", "min:64"],
+            ["nullable", "string"],
+            ["nullable"],
         ],
         "sections" => [
             "general" => [

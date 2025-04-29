@@ -73,31 +73,23 @@ return [
     "indices" => [
         [
             "name" => "PRIMARY",
-            "columns" => [
-                "id",
-            ],
+            "columns" => ["id"],
             "unique" => 0,
         ],
         [
             "name" => "at",
-            "columns" => [
-                "at",
-            ],
+            "columns" => ["at"],
             "unique" => 0,
         ],
         [
             "name" => "fk_user_uploads_users",
-            "columns" => [
-                "user_id",
-            ],
+            "columns" => ["user_id"],
             "unique" => 0,
         ],
     ],
     "primaryKey" => [
         "name" => "PRIMARY",
-        "columns" => [
-            "id",
-        ],
+        "columns" => ["id"],
     ],
     "lang.en" => [
         "name" => "User Uploads",
@@ -158,47 +150,23 @@ return [
     "action.index" => [
         "type" => "index",
         "paginate" => 10,
-        "columns" => [
-            "name",
-            "type",
-        ],
+        "columns" => ["name", "type"],
     ],
     "action.create" => [
         "type" => "create",
         "uploadPath" => "user_uploads/{year}/{id}",
         "rules" => [
-            [
-                "required",
-            ],
-            [
-                "required",
-            ],
-            [
-                "required",
-                "uuid",
-                "exists:users,id",
-            ],
-            [
-                "required",
+            ["required"],
+            ["required"],
+            ["required", "uuid", "exists:users,id"],
+            ["required",
                 "string",
                 "file",
-                "extensions:pdf,docx,xlsx,pptx,jpg,png,zip,rar",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-            ],
+                "extensions:pdf,docx,xlsx,pptx,jpg,png,zip,rar"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable"],
         ],
         "sections" => [
             "general" => [
@@ -275,38 +243,17 @@ return [
         "type" => "update",
         "uploadPath" => "user_uploads/{year}/{id}",
         "rules" => [
-            [
-                "required",
-            ],
-            [
-                "required",
-            ],
-            [
-                "required",
-                "uuid",
-                "exists:users,id",
-            ],
-            [
-                "required",
+            ["required"],
+            ["required"],
+            ["required", "uuid", "exists:users,id"],
+            ["required",
                 "string",
                 "file",
-                "extensions:pdf,docx,xlsx,pptx,jpg,png,zip,rar",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-            ],
+                "extensions:pdf,docx,xlsx,pptx,jpg,png,zip,rar"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable"],
         ],
         "sections" => [
             "general" => [

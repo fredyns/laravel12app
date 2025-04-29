@@ -71,31 +71,23 @@ return [
     "indices" => [
         [
             "name" => "PRIMARY",
-            "columns" => [
-                "id",
-            ],
+            "columns" => ["id"],
             "unique" => 0,
         ],
         [
             "name" => "at",
-            "columns" => [
-                "at",
-            ],
+            "columns" => ["at"],
             "unique" => 0,
         ],
         [
             "name" => "fk_user_activity_logs_users_idx",
-            "columns" => [
-                "user_id",
-            ],
+            "columns" => ["user_id"],
             "unique" => 0,
         ],
     ],
     "primaryKey" => [
         "name" => "PRIMARY",
-        "columns" => [
-            "id",
-        ],
+        "columns" => ["id"],
     ],
     "lang.en" => [
         "name" => "User Activity Logs",
@@ -155,44 +147,19 @@ return [
     "action.index" => [
         "type" => "index",
         "paginate" => 10,
-        "columns" => [
-            "title",
-            "i_p_address",
-        ],
+        "columns" => ["title", "i_p_address"],
     ],
     "action.create" => [
         "type" => "create",
         "uploadPath" => "user_activity_logs/{year}/{id}",
         "rules" => [
-            [
-                "required",
-            ],
-            [
-                "required",
-            ],
-            [
-                "required",
-                "uuid",
-                "exists:users,id",
-            ],
-            [
-                "required",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-                "url:http,https",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-                "ip",
-            ],
+            ["required"],
+            ["required"],
+            ["required", "uuid", "exists:users,id"],
+            ["required", "string"],
+            ["nullable", "string", "url:http,https"],
+            ["nullable", "string"],
+            ["nullable", "string", "ip"],
         ],
         "sections" => [
             "general" => [
@@ -263,35 +230,13 @@ return [
         "type" => "update",
         "uploadPath" => "user_activity_logs/{year}/{id}",
         "rules" => [
-            [
-                "required",
-            ],
-            [
-                "required",
-            ],
-            [
-                "required",
-                "uuid",
-                "exists:users,id",
-            ],
-            [
-                "required",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-                "url:http,https",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-                "ip",
-            ],
+            ["required"],
+            ["required"],
+            ["required", "uuid", "exists:users,id"],
+            ["required", "string"],
+            ["nullable", "string", "url:http,https"],
+            ["nullable", "string"],
+            ["nullable", "string", "ip"],
         ],
         "sections" => [
             "general" => [

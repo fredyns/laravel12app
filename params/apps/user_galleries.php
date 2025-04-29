@@ -73,31 +73,23 @@ return [
     "indices" => [
         [
             "name" => "PRIMARY",
-            "columns" => [
-                "id",
-            ],
+            "columns" => ["id"],
             "unique" => 0,
         ],
         [
             "name" => "at",
-            "columns" => [
-                "at",
-            ],
+            "columns" => ["at"],
             "unique" => 0,
         ],
         [
             "name" => "fk_user_galleries_users",
-            "columns" => [
-                "user_id",
-            ],
+            "columns" => ["user_id"],
             "unique" => 0,
         ],
     ],
     "primaryKey" => [
         "name" => "PRIMARY",
-        "columns" => [
-            "id",
-        ],
+        "columns" => ["id"],
     ],
     "lang.en" => [
         "name" => "User Galleries",
@@ -158,47 +150,20 @@ return [
     "action.index" => [
         "type" => "index",
         "paginate" => 10,
-        "columns" => [
-            "name",
-            "type",
-        ],
+        "columns" => ["name", "type"],
     ],
     "action.create" => [
         "type" => "create",
         "uploadPath" => "user_galleries/{year}/{id}",
         "rules" => [
-            [
-                "required",
-            ],
-            [
-                "required",
-            ],
-            [
-                "required",
-                "uuid",
-                "exists:users,id",
-            ],
-            [
-                "required",
-                "string",
-                "image",
-                "extensions:jpg,png",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-            ],
+            ["required"],
+            ["required"],
+            ["required", "uuid", "exists:users,id"],
+            ["required", "string", "image", "extensions:jpg,png"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable"],
         ],
         "sections" => [
             "general" => [
@@ -276,38 +241,14 @@ return [
         "type" => "update",
         "uploadPath" => "user_galleries/{year}/{id}",
         "rules" => [
-            [
-                "required",
-            ],
-            [
-                "required",
-            ],
-            [
-                "required",
-                "uuid",
-                "exists:users,id",
-            ],
-            [
-                "required",
-                "string",
-                "image",
-                "extensions:jpg,png",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-            ],
+            ["required"],
+            ["required"],
+            ["required", "uuid", "exists:users,id"],
+            ["required", "string", "image", "extensions:jpg,png"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable"],
         ],
         "sections" => [
             "general" => [

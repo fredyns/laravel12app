@@ -134,31 +134,23 @@ return [
     "indices" => [
         [
             "name" => "PRIMARY",
-            "columns" => [
-                "id",
-            ],
+            "columns" => ["id"],
             "unique" => 0,
         ],
         [
             "name" => "created_at",
-            "columns" => [
-                "created_at",
-            ],
+            "columns" => ["created_at"],
             "unique" => 0,
         ],
         [
             "name" => "fk_subrecords_records",
-            "columns" => [
-                "records_id",
-            ],
+            "columns" => ["records_id"],
             "unique" => 0,
         ],
     ],
     "primaryKey" => [
         "name" => "PRIMARY",
-        "columns" => [
-            "id",
-        ],
+        "columns" => ["id"],
     ],
     "lang.en" => [
         "name" => "Subrecords",
@@ -226,82 +218,36 @@ return [
     "action.index" => [
         "type" => "index",
         "paginate" => 10,
-        "columns" => [
-            "datetime",
+        "columns" => ["datetime",
             "date",
             "time",
             "n_p_w_p",
             "i_p_address",
             "latitude",
-            "longitude",
-        ],
+            "longitude"],
     ],
     "action.create" => [
         "type" => "create",
         "uploadPath" => "subrecords/{year}/{id}",
         "rules" => [
-            [
-                "required",
-            ],
-            [
-                "required",
-                "uuid",
-                "exists:records,id",
-            ],
-            [
-                "nullable",
-                "date",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-                "date_format:H:i",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
+            ["required"],
+            ["required", "uuid", "exists:records,id"],
+            ["nullable", "date"],
+            ["nullable"],
+            ["nullable", "date_format:H:i"],
+            ["nullable", "numeric"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable",
                 "string",
                 "file",
-                "extensions:pdf,docx,xlsx,pptx,jpg,png,zip,rar",
-            ],
-            [
-                "nullable",
-                "string",
-                "image",
-                "extensions:jpg,png",
-            ],
-            [
-                "nullable",
-                "string",
-                "ip",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-            ],
+                "extensions:pdf,docx,xlsx,pptx,jpg,png,zip,rar"],
+            ["nullable", "string", "image", "extensions:jpg,png"],
+            ["nullable", "string", "ip"],
+            ["nullable", "numeric"],
+            ["nullable", "numeric"],
+            ["nullable"],
+            ["nullable"],
         ],
         "sections" => [
             "general" => [
@@ -417,68 +363,24 @@ return [
         "type" => "update",
         "uploadPath" => "subrecords/{year}/{id}",
         "rules" => [
-            [
-                "required",
-            ],
-            [
-                "required",
-                "uuid",
-                "exists:records,id",
-            ],
-            [
-                "nullable",
-                "date",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-                "date_format:H:i",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
+            ["required"],
+            ["required", "uuid", "exists:records,id"],
+            ["nullable", "date"],
+            ["nullable"],
+            ["nullable", "date_format:H:i"],
+            ["nullable", "numeric"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable",
                 "string",
                 "file",
-                "extensions:pdf,docx,xlsx,pptx,jpg,png,zip,rar",
-            ],
-            [
-                "nullable",
-                "string",
-                "image",
-                "extensions:jpg,png",
-            ],
-            [
-                "nullable",
-                "string",
-                "ip",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-            ],
+                "extensions:pdf,docx,xlsx,pptx,jpg,png,zip,rar"],
+            ["nullable", "string", "image", "extensions:jpg,png"],
+            ["nullable", "string", "ip"],
+            ["nullable", "numeric"],
+            ["nullable", "numeric"],
+            ["nullable"],
+            ["nullable"],
         ],
         "sections" => [
             "general" => [

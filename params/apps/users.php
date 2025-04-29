@@ -106,31 +106,23 @@ return [
     "indices" => [
         [
             "name" => "email_UNIQUE",
-            "columns" => [
-                "email",
-            ],
+            "columns" => ["email"],
             "unique" => 1,
         ],
         [
             "name" => "PRIMARY",
-            "columns" => [
-                "id",
-            ],
+            "columns" => ["id"],
             "unique" => 0,
         ],
         [
             "name" => "created_at",
-            "columns" => [
-                "created_at",
-            ],
+            "columns" => ["created_at"],
             "unique" => 0,
         ],
     ],
     "primaryKey" => [
         "name" => "PRIMARY",
-        "columns" => [
-            "id",
-        ],
+        "columns" => ["id"],
     ],
     "lang.en" => [
         "name" => "Users",
@@ -196,67 +188,25 @@ return [
     "action.index" => [
         "type" => "index",
         "paginate" => 10,
-        "columns" => [
-            "name",
-            "email",
-            "current_team_id",
-        ],
+        "columns" => ["name", "email", "current_team_id"],
     ],
     "action.create" => [
         "type" => "create",
         "uploadPath" => "users/{year}/{id}",
         "rules" => [
-            [
-                "required",
-            ],
-            [
-                "required",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-                "email",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-                "numeric",
-                "uuid",
-            ],
-            [
-                "nullable",
-                "string",
-                "image",
-                "extensions:jpg,png",
-            ],
+            ["required"],
+            ["required"],
+            ["nullable"],
+            ["nullable", "string"],
+            ["nullable", "string", "email"],
+            ["nullable"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable"],
+            ["nullable", "numeric", "uuid"],
+            ["nullable", "string", "image", "extensions:jpg,png"],
         ],
         "sections" => [
             "general" => [
@@ -357,57 +307,19 @@ return [
         "type" => "update",
         "uploadPath" => "users/{year}/{id}",
         "rules" => [
-            [
-                "required",
-            ],
-            [
-                "required",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-                "email",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-                "numeric",
-                "uuid",
-            ],
-            [
-                "nullable",
-                "string",
-                "image",
-                "extensions:jpg,png",
-            ],
+            ["required"],
+            ["required"],
+            ["nullable"],
+            ["nullable", "string"],
+            ["nullable", "string", "email"],
+            ["nullable"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable"],
+            ["nullable", "numeric", "uuid"],
+            ["nullable", "string", "image", "extensions:jpg,png"],
         ],
         "sections" => [
             "general" => [

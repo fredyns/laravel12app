@@ -46,6 +46,24 @@ class Arraying
     protected static function exportList(array $array, $indent = 0): string
     {
         $nextIndent = $indent + 1;
+
+        if (static::areNumbers($array)) {
+            return '[' . implode(', ', $array) . ']';
+        }
+
+        if (static::areScalars($array)) {
+            $array = array_map(fn($value) => "\"" . addslashes($value) . "\"", $array);
+            $result = '[' . implode(', ', $array) . ']';
+
+            $limit = 80 - ($indent * static::TAB_SIZE);
+            if (strlen($result) > $limit) {
+                $childIndent = ($nextIndent + static::TAB_SIZE);
+                $result = str_replace("\", ", ("\",\n" . str_repeat(' ', $childIndent)), $result);
+            }
+
+            return $result;
+        }
+
         $result = "[" . self::newline();
 
         foreach ($array as $value) {
@@ -57,9 +75,19 @@ class Arraying
 
         $result .= self::tabs($indent) . "]";
 
-        if (self::$inline) $result = trim($result, " ,");
-
         return $result;
+    }
+
+    protected static function areNumbers(array $array): bool
+    {
+        $numbers = array_filter($array, 'is_numeric');
+        return count($numbers) == count($array);
+    }
+
+    protected static function areScalars(array $array): bool
+    {
+        $scalars = array_filter($array, 'is_scalar');
+        return count($scalars) == count($array);
     }
 
     protected static function exportKeyPair(array $array, $indent = 0): string

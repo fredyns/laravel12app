@@ -109,10 +109,7 @@ return [
             "type" => "ENUM",
             "nullable" => TRUE,
             "default" => NULL,
-            "options" => [
-                "enable",
-                "disable",
-            ],
+            "options" => ["enable", "disable"],
         ],
         "text" => [
             "name" => "text",
@@ -208,31 +205,23 @@ return [
     "indices" => [
         [
             "name" => "PRIMARY",
-            "columns" => [
-                "id",
-            ],
+            "columns" => ["id"],
             "unique" => 0,
         ],
         [
             "name" => "created_at",
-            "columns" => [
-                "created_at",
-            ],
+            "columns" => ["created_at"],
             "unique" => 0,
         ],
         [
             "name" => "fk_records_users",
-            "columns" => [
-                "user_id",
-            ],
+            "columns" => ["user_id"],
             "unique" => 0,
         ],
     ],
     "primaryKey" => [
         "name" => "PRIMARY",
-        "columns" => [
-            "id",
-        ],
+        "columns" => ["id"],
     ],
     "lang.en" => [
         "name" => "Records",
@@ -242,6 +231,7 @@ return [
         "edit_title" => "Edit Record",
         "show_title" => "Show Record",
         "columns" => [
+            //todo: generate
             "user_id" => "User",
             "string" => "String",
         ],
@@ -279,7 +269,7 @@ return [
         "time" => "time()",
         "i_p_address" => "localIpv4()",
         "boolean" => "boolean(0.5)",
-        "enumerate" => "randomElement([\"enable\", \"disable\", ])",
+        "enumerate" => "randomElement([\"enable\", \"disable\"])",
         "text" => "text(5)",
         "file" => NULL,
         "image" => NULL,
@@ -309,8 +299,7 @@ return [
     "action.index" => [
         "type" => "index",
         "paginate" => 10,
-        "columns" => [
-            "string",
+        "columns" => ["string",//todo: cek struktur
             "email",
             "integer",
             "decimal",
@@ -322,112 +311,36 @@ return [
             "boolean",
             "enumerate",
             "latitude",
-            "longitude",
-        ],
+            "longitude"],
     ],
     "action.create" => [
         "type" => "create",
         "uploadPath" => "records/{year}/{id}",
         "rules" => [
-            [
-                "required",
-            ],
-            [
-                "nullable",
-                "uuid",
-                "exists:users,id",
-            ],
-            [
-                "required",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-                "email",
-            ],
-            [
-                "nullable",
-                "numeric",
-                "min:1",
-                "max:100",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-                "date",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-                "date_format:H:i",
-            ],
-            [
-                "nullable",
-                "string",
-                "ip",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-                "in:enable,disable",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-                "file",
-                "extensions:pdf,docx,xlsx,pptx,jpg,png,zip,rar",
-            ],
-            [
-                "nullable",
-                "string",
-                "image",
-                "extensions:jpg,png",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-            ],
+            ["required"],
+            ["nullable", "uuid", "exists:users,id"],
+            ["required", "string"],
+            ["nullable", "string", "email"],
+            ["nullable", "numeric", "min:1", "max:100"],
+            ["nullable", "numeric"],
+            ["nullable", "numeric"],
+            ["nullable", "date"],
+            ["nullable"],
+            ["nullable", "date_format:H:i"],
+            ["nullable", "string", "ip"],
+            ["nullable", "numeric"],
+            ["nullable", "in:enable,disable"],
+            ["nullable", "string"],
+            ["nullable", "string", "file", "extensions:pdf,docx,xlsx,pptx,jpg,png,zip,rar"],
+            ["nullable", "string", "image", "extensions:jpg,png"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable", "numeric"],
+            ["nullable", "numeric"],
+            ["nullable"],
+            ["nullable"],
+            ["nullable"],
+            ["nullable"],
         ],
         "sections" => [
             "general" => [
@@ -607,105 +520,33 @@ return [
         "type" => "update",
         "uploadPath" => "records/{year}/{id}",
         "rules" => [
-            [
-                "required",
-            ],
-            [
-                "nullable",
-                "uuid",
-                "exists:users,id",
-            ],
-            [
-                "required",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-                "email",
-            ],
-            [
-                "nullable",
-                "numeric",
-                "min:1",
-                "max:100",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-                "date",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-                "date_format:H:i",
-            ],
-            [
-                "nullable",
-                "string",
-                "ip",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-                "in:enable,disable",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
+            ["required"],
+            ["nullable", "uuid", "exists:users,id"],
+            ["required", "string"],
+            ["nullable", "string", "email"],
+            ["nullable", "numeric", "min:1", "max:100"],
+            ["nullable", "numeric"],
+            ["nullable", "numeric"],
+            ["nullable", "date"],
+            ["nullable"],
+            ["nullable", "date_format:H:i"],
+            ["nullable", "string", "ip"],
+            ["nullable", "numeric"],
+            ["nullable", "in:enable,disable"],
+            ["nullable", "string"],
+            ["nullable",
                 "string",
                 "file",
-                "extensions:pdf,docx,xlsx,pptx,jpg,png,zip,rar",
-            ],
-            [
-                "nullable",
-                "string",
-                "image",
-                "extensions:jpg,png",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "string",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-                "numeric",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-            ],
-            [
-                "nullable",
-            ],
+                "extensions:pdf,docx,xlsx,pptx,jpg,png,zip,rar"],
+            ["nullable", "string", "image", "extensions:jpg,png"],
+            ["nullable", "string"],
+            ["nullable", "string"],
+            ["nullable", "numeric"],
+            ["nullable", "numeric"],
+            ["nullable"],
+            ["nullable"],
+            ["nullable"],
+            ["nullable"],
         ],
         "sections" => [
             "general" => [
