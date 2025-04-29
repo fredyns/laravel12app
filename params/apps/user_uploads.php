@@ -99,9 +99,9 @@ return [
         "edit_title" => "Edit User Upload",
         "show_title" => "Show User Upload",
         "columns" => [
-            "id" => "Id",
+            "id" => "ID",
             "at" => "At",
-            "user_id" => "User Id",
+            "user_id" => "User",
             "file" => "File",
             "name" => "Name",
             "description" => "Description",
@@ -109,9 +109,9 @@ return [
             "metadata" => "Metadata",
         ],
         "fields" => [
-            "id" => "Id",
+            "id" => "ID",
             "at" => "At",
-            "user_id" => "User Id",
+            "user_id" => "User",
             "file" => "File",
             "name" => "Name",
             "description" => "Description",
@@ -127,9 +127,9 @@ return [
         "edit_title" => "Edit User Upload",
         "show_title" => "Lihat User Upload",
         "columns" => [
-            "id" => "Id",
+            "id" => "ID",
             "at" => "At",
-            "user_id" => "User Id",
+            "user_id" => "User",
             "file" => "File",
             "name" => "Name",
             "description" => "Description",
@@ -137,9 +137,9 @@ return [
             "metadata" => "Metadata",
         ],
         "fields" => [
-            "id" => "Id",
+            "id" => "ID",
             "at" => "At",
-            "user_id" => "User Id",
+            "user_id" => "User",
             "file" => "File",
             "name" => "Name",
             "description" => "Description",
@@ -292,9 +292,6 @@ return [
             "general" => [
                 "title" => "User Upload",
                 "fields" => [
-                    "id" => [
-                        "col-lg" => "full",
-                    ],
                     "at" => [
                         "col-lg" => "full",
                     ],
@@ -311,9 +308,6 @@ return [
                         "col-lg" => "full",
                     ],
                     "type" => [
-                        "col-lg" => "full",
-                    ],
-                    "metadata" => [
                         "col-lg" => "full",
                     ],
                 ],

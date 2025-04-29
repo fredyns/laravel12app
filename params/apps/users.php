@@ -132,7 +132,7 @@ return [
         "edit_title" => "Edit User",
         "show_title" => "Show User",
         "columns" => [
-            "id" => "Id",
+            "id" => "ID",
             "created_at" => "Created At",
             "updated_at" => "Updated At",
             "name" => "Name",
@@ -143,11 +143,11 @@ return [
             "two_factor_secret" => "Two Factor Secret",
             "two_factor_recovery_codes" => "Two Factor Recovery Codes",
             "two_factor_confirmed_at" => "Two Factor Confirmed At",
-            "current_team_id" => "Current Team Id",
+            "current_team_id" => "Current Team",
             "profile_photo_path" => "Profile Photo Path",
         ],
         "fields" => [
-            "id" => "Id",
+            "id" => "ID",
             "created_at" => "Created At",
             "updated_at" => "Updated At",
             "name" => "Name",
@@ -158,7 +158,7 @@ return [
             "two_factor_secret" => "Two Factor Secret",
             "two_factor_recovery_codes" => "Two Factor Recovery Codes",
             "two_factor_confirmed_at" => "Two Factor Confirmed At",
-            "current_team_id" => "Current Team Id",
+            "current_team_id" => "Current Team",
             "profile_photo_path" => "Profile Photo Path",
         ],
     ],
@@ -170,7 +170,7 @@ return [
         "edit_title" => "Edit User",
         "show_title" => "Lihat User",
         "columns" => [
-            "id" => "Id",
+            "id" => "ID",
             "created_at" => "Created At",
             "updated_at" => "Updated At",
             "name" => "Name",
@@ -181,11 +181,11 @@ return [
             "two_factor_secret" => "Two Factor Secret",
             "two_factor_recovery_codes" => "Two Factor Recovery Codes",
             "two_factor_confirmed_at" => "Two Factor Confirmed At",
-            "current_team_id" => "Current Team Id",
+            "current_team_id" => "Current Team",
             "profile_photo_path" => "Profile Photo Path",
         ],
         "fields" => [
-            "id" => "Id",
+            "id" => "ID",
             "created_at" => "Created At",
             "updated_at" => "Updated At",
             "name" => "Name",
@@ -196,7 +196,7 @@ return [
             "two_factor_secret" => "Two Factor Secret",
             "two_factor_recovery_codes" => "Two Factor Recovery Codes",
             "two_factor_confirmed_at" => "Two Factor Confirmed At",
-            "current_team_id" => "Current Team Id",
+            "current_team_id" => "Current Team",
             "profile_photo_path" => "Profile Photo Path",
         ],
     ],
@@ -342,28 +342,10 @@ return [
             "general" => [
                 "title" => "User",
                 "fields" => [
-                    "id" => [
-                        "col-lg" => "full",
-                    ],
-                    "created_at" => [
-                        "col-lg" => "full",
-                    ],
-                    "updated_at" => [
-                        "col-lg" => "full",
-                    ],
                     "name" => [
                         "col-lg" => "full",
                     ],
                     "email" => [
-                        "col-lg" => "full",
-                    ],
-                    "email_verified_at" => [
-                        "col-lg" => "full",
-                    ],
-                    "password" => [
-                        "col-lg" => "full",
-                    ],
-                    "remember_token" => [
                         "col-lg" => "full",
                     ],
                     "two_factor_secret" => [

@@ -602,6 +602,8 @@ class MakeParams extends Command
     protected function detailParams($table)
     {
         foreach ($table['columns'] as $column) {
+            if (in_array($column['name'], static::$systemColumns)) continue;
+
             yield $column['name'] => $this->detailParam($column);
         }
     }
@@ -615,7 +617,19 @@ class MakeParams extends Command
     protected function labelParams($table)
     {
         foreach ($table['columns'] as $column) {
-            yield $column['name'] => Str::title(str_replace('_', ' ', $column['name']));
+            if ($column['name'] == 'id') {
+                yield 'id' => 'ID';
+            } else {
+                $label = $column['name'];
+                if (str_ends_with($label, '_id')) {
+                    $label = substr($label, 0, strlen($label) - 3);
+                }
+                $label = str_replace('_', ' ', $label);
+                $label = Str::title($label);
+                $label = preg_replace('/(?<=\b[A-Z])\s(?=[A-Z]\b)/', '', $label);
+
+                yield $column['name'] => $label;
+            }
         }
     }
 

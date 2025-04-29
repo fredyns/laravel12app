@@ -97,22 +97,22 @@ return [
         "edit_title" => "Edit User Activity Log",
         "show_title" => "Show User Activity Log",
         "columns" => [
-            "id" => "Id",
+            "id" => "ID",
             "at" => "At",
-            "user_id" => "User Id",
+            "user_id" => "User",
             "title" => "Title",
             "link" => "Link",
             "message" => "Message",
-            "i_p_address" => "I P Address",
+            "i_p_address" => "IP Address",
         ],
         "fields" => [
-            "id" => "Id",
+            "id" => "ID",
             "at" => "At",
-            "user_id" => "User Id",
+            "user_id" => "User",
             "title" => "Title",
             "link" => "Link",
             "message" => "Message",
-            "i_p_address" => "I P Address",
+            "i_p_address" => "IP Address",
         ],
     ],
     "lang.id" => [
@@ -123,22 +123,22 @@ return [
         "edit_title" => "Edit User Activity Log",
         "show_title" => "Lihat User Activity Log",
         "columns" => [
-            "id" => "Id",
+            "id" => "ID",
             "at" => "At",
-            "user_id" => "User Id",
+            "user_id" => "User",
             "title" => "Title",
             "link" => "Link",
             "message" => "Message",
-            "i_p_address" => "I P Address",
+            "i_p_address" => "IP Address",
         ],
         "fields" => [
-            "id" => "Id",
+            "id" => "ID",
             "at" => "At",
-            "user_id" => "User Id",
+            "user_id" => "User",
             "title" => "Title",
             "link" => "Link",
             "message" => "Message",
-            "i_p_address" => "I P Address",
+            "i_p_address" => "IP Address",
         ],
     ],
     "faker" => [
@@ -285,9 +285,6 @@ return [
             "general" => [
                 "title" => "User Activity Log",
                 "fields" => [
-                    "id" => [
-                        "col-lg" => "full",
-                    ],
                     "at" => [
                         "col-lg" => "full",
                     ],

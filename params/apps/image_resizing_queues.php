@@ -93,7 +93,7 @@ return [
         "edit_title" => "Edit Image Resizing Queue",
         "show_title" => "Show Image Resizing Queue",
         "columns" => [
-            "id" => "Id",
+            "id" => "ID",
             "created_at" => "Created At",
             "source" => "Source",
             "save_as" => "Save As",
@@ -103,7 +103,7 @@ return [
             "metadata" => "Metadata",
         ],
         "fields" => [
-            "id" => "Id",
+            "id" => "ID",
             "created_at" => "Created At",
             "source" => "Source",
             "save_as" => "Save As",
@@ -121,7 +121,7 @@ return [
         "edit_title" => "Edit Image Resizing Queue",
         "show_title" => "Lihat Image Resizing Queue",
         "columns" => [
-            "id" => "Id",
+            "id" => "ID",
             "created_at" => "Created At",
             "source" => "Source",
             "save_as" => "Save As",
@@ -131,7 +131,7 @@ return [
             "metadata" => "Metadata",
         ],
         "fields" => [
-            "id" => "Id",
+            "id" => "ID",
             "created_at" => "Created At",
             "source" => "Source",
             "save_as" => "Save As",
@@ -280,12 +280,6 @@ return [
             "general" => [
                 "title" => "Image Resizing Queue",
                 "fields" => [
-                    "id" => [
-                        "col-lg" => "full",
-                    ],
-                    "created_at" => [
-                        "col-lg" => "full",
-                    ],
                     "source" => [
                         "col-lg" => "full",
                     ],
@@ -299,9 +293,6 @@ return [
                         "col-lg" => "full",
                     ],
                     "remark" => [
-                        "col-lg" => "full",
-                    ],
-                    "metadata" => [
                         "col-lg" => "full",
                     ],
                 ],
