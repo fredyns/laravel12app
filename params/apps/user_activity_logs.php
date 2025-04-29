@@ -3,19 +3,19 @@ return [
     "migrationPrefix" => "2025_04_29_075641",
     "name" => "user_activity_logs",
     "columns" => [
-        [
+        "id" => [
             "name" => "id",
             "type" => "BINARY",
             "nullable" => FALSE,
             "default" => "(UUID_TO_BIN(UUID()))",
         ],
-        [
+        "at" => [
             "name" => "at",
             "type" => "TIMESTAMP",
             "nullable" => FALSE,
             "default" => NULL,
         ],
-        [
+        "user_id" => [
             "name" => "user_id",
             "type" => "BINARY",
             "nullable" => FALSE,
@@ -25,14 +25,14 @@ return [
                 "uuid" => TRUE,
             ],
         ],
-        [
+        "title" => [
             "name" => "title",
             "type" => "VARCHAR",
             "nullable" => FALSE,
             "default" => NULL,
             "length" => 255,
         ],
-        [
+        "link" => [
             "name" => "link",
             "type" => "TEXT",
             "nullable" => TRUE,
@@ -42,13 +42,13 @@ return [
                 "url" => TRUE,
             ],
         ],
-        [
+        "message" => [
             "name" => "message",
             "type" => "TEXT",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "i_p_address" => [
             "name" => "i_p_address",
             "type" => "VARCHAR",
             "nullable" => TRUE,

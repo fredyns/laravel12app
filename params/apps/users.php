@@ -3,32 +3,32 @@ return [
     "migrationPrefix" => "2025_04_29_075641",
     "name" => "users",
     "columns" => [
-        [
+        "id" => [
             "name" => "id",
             "type" => "BINARY",
             "nullable" => FALSE,
             "default" => "(UUID_TO_BIN(UUID()))",
         ],
-        [
+        "created_at" => [
             "name" => "created_at",
             "type" => "TIMESTAMP",
             "nullable" => FALSE,
             "default" => "NOW()",
         ],
-        [
+        "updated_at" => [
             "name" => "updated_at",
             "type" => "TIMESTAMP",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "name" => [
             "name" => "name",
             "type" => "VARCHAR",
             "nullable" => TRUE,
             "default" => NULL,
             "length" => 255,
         ],
-        [
+        "email" => [
             "name" => "email",
             "type" => "VARCHAR",
             "nullable" => TRUE,
@@ -39,13 +39,13 @@ return [
                 "email" => TRUE,
             ],
         ],
-        [
+        "email_verified_at" => [
             "name" => "email_verified_at",
             "type" => "TIMESTAMP",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "password" => [
             "name" => "password",
             "type" => "VARCHAR",
             "nullable" => TRUE,
@@ -56,32 +56,32 @@ return [
                 "secret" => TRUE,
             ],
         ],
-        [
+        "remember_token" => [
             "name" => "remember_token",
             "type" => "VARCHAR",
             "nullable" => TRUE,
             "default" => NULL,
             "length" => 255,
         ],
-        [
+        "two_factor_secret" => [
             "name" => "two_factor_secret",
             "type" => "TEXT",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "two_factor_recovery_codes" => [
             "name" => "two_factor_recovery_codes",
             "type" => "TEXT",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "two_factor_confirmed_at" => [
             "name" => "two_factor_confirmed_at",
             "type" => "TIMESTAMP",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "current_team_id" => [
             "name" => "current_team_id",
             "type" => "BIGINT",
             "nullable" => TRUE,
@@ -91,7 +91,7 @@ return [
                 "uuid" => TRUE,
             ],
         ],
-        [
+        "profile_photo_path" => [
             "name" => "profile_photo_path",
             "type" => "TEXT",
             "nullable" => TRUE,
@@ -102,7 +102,7 @@ return [
             ],
         ],
     ],
-    "foreignKeys" =>     [],
+    "foreignKeys" => [],
     "indices" => [
         [
             "name" => "email_UNIQUE",

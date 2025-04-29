@@ -3,13 +3,13 @@ return [
     "migrationPrefix" => "2025_04_29_075641",
     "name" => "records",
     "columns" => [
-        [
+        "id" => [
             "name" => "id",
             "type" => "BINARY",
             "nullable" => FALSE,
             "default" => "(UUID_TO_BIN(UUID()))",
         ],
-        [
+        "user_id" => [
             "name" => "user_id",
             "type" => "BINARY",
             "nullable" => TRUE,
@@ -19,14 +19,14 @@ return [
                 "uuid" => TRUE,
             ],
         ],
-        [
+        "string" => [
             "name" => "string",
             "type" => "VARCHAR",
             "nullable" => FALSE,
             "default" => NULL,
             "length" => 255,
         ],
-        [
+        "email" => [
             "name" => "email",
             "type" => "VARCHAR",
             "nullable" => TRUE,
@@ -37,7 +37,7 @@ return [
                 "email" => TRUE,
             ],
         ],
-        [
+        "integer" => [
             "name" => "integer",
             "type" => "INT",
             "nullable" => TRUE,
@@ -49,13 +49,13 @@ return [
                 "max" => 100,
             ],
         ],
-        [
+        "decimal" => [
             "name" => "decimal",
             "type" => "DECIMAL",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "n_p_w_p" => [
             "name" => "n_p_w_p",
             "type" => "BIGINT",
             "nullable" => TRUE,
@@ -65,25 +65,25 @@ return [
                 "npwp" => TRUE,
             ],
         ],
-        [
+        "datetime" => [
             "name" => "datetime",
             "type" => "DATETIME",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "date" => [
             "name" => "date",
             "type" => "DATE",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "time" => [
             "name" => "time",
             "type" => "TIME",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "i_p_address" => [
             "name" => "i_p_address",
             "type" => "VARCHAR",
             "nullable" => TRUE,
@@ -94,7 +94,7 @@ return [
                 "ipaddress" => TRUE,
             ],
         ],
-        [
+        "boolean" => [
             "name" => "boolean",
             "type" => "TINYINT",
             "nullable" => TRUE,
@@ -104,7 +104,7 @@ return [
                 "boolean" => TRUE,
             ],
         ],
-        [
+        "enumerate" => [
             "name" => "enumerate",
             "type" => "ENUM",
             "nullable" => TRUE,
@@ -114,13 +114,13 @@ return [
                 "disable",
             ],
         ],
-        [
+        "text" => [
             "name" => "text",
             "type" => "TEXT",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "file" => [
             "name" => "file",
             "type" => "TEXT",
             "nullable" => TRUE,
@@ -130,7 +130,7 @@ return [
                 "file" => TRUE,
             ],
         ],
-        [
+        "image" => [
             "name" => "image",
             "type" => "TEXT",
             "nullable" => TRUE,
@@ -140,7 +140,7 @@ return [
                 "image" => "jpg,jpeg,png",
             ],
         ],
-        [
+        "markdown_text" => [
             "name" => "markdown_text",
             "type" => "TEXT",
             "nullable" => TRUE,
@@ -150,7 +150,7 @@ return [
                 "markdown" => TRUE,
             ],
         ],
-        [
+        "w_y_s_i_w_y_g" => [
             "name" => "w_y_s_i_w_y_g",
             "type" => "TEXT",
             "nullable" => TRUE,
@@ -160,37 +160,37 @@ return [
                 "wysiwyg" => TRUE,
             ],
         ],
-        [
+        "latitude" => [
             "name" => "latitude",
             "type" => "DECIMAL",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "longitude" => [
             "name" => "longitude",
             "type" => "DECIMAL",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "created_at" => [
             "name" => "created_at",
             "type" => "TIMESTAMP",
             "nullable" => TRUE,
             "default" => "NOW()",
         ],
-        [
+        "updated_at" => [
             "name" => "updated_at",
             "type" => "TIMESTAMP",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "created_by" => [
             "name" => "created_by",
             "type" => "BINARY",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "updated_by" => [
             "name" => "updated_by",
             "type" => "BINARY",
             "nullable" => TRUE,
@@ -242,7 +242,6 @@ return [
         "edit_title" => "Edit Record",
         "show_title" => "Show Record",
         "columns" => [
-            //todo:generate
             "user_id" => "User",
             "string" => "String",
         ],
@@ -280,7 +279,7 @@ return [
         "time" => "time()",
         "i_p_address" => "localIpv4()",
         "boolean" => "boolean(0.5)",
-        "enumerate" => "randomElement([\"enable\", \"disable\", ])",// todo: cek
+        "enumerate" => "randomElement([\"enable\", \"disable\", ])",
         "text" => "text(5)",
         "file" => NULL,
         "image" => NULL,
@@ -330,9 +329,7 @@ return [
         "type" => "create",
         "uploadPath" => "records/{year}/{id}",
         "rules" => [
-            //todo:set field
             [
-                //todo:simplify
                 "required",
             ],
             [

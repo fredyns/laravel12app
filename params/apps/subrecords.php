@@ -3,13 +3,13 @@ return [
     "migrationPrefix" => "2025_04_29_075641",
     "name" => "subrecords",
     "columns" => [
-        [
+        "id" => [
             "name" => "id",
             "type" => "BINARY",
             "nullable" => FALSE,
             "default" => "(UUID_TO_BIN(UUID()))",
         ],
-        [
+        "records_id" => [
             "name" => "records_id",
             "type" => "BINARY",
             "nullable" => FALSE,
@@ -19,25 +19,25 @@ return [
                 "uuid" => TRUE,
             ],
         ],
-        [
+        "datetime" => [
             "name" => "datetime",
             "type" => "DATETIME",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "date" => [
             "name" => "date",
             "type" => "DATE",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "time" => [
             "name" => "time",
             "type" => "TIME",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "n_p_w_p" => [
             "name" => "n_p_w_p",
             "type" => "BIGINT",
             "nullable" => TRUE,
@@ -47,7 +47,7 @@ return [
                 "npwp" => TRUE,
             ],
         ],
-        [
+        "markdown_text" => [
             "name" => "markdown_text",
             "type" => "TEXT",
             "nullable" => TRUE,
@@ -57,7 +57,7 @@ return [
                 "markdown" => TRUE,
             ],
         ],
-        [
+        "w_y_s_i_w_y_g" => [
             "name" => "w_y_s_i_w_y_g",
             "type" => "TEXT",
             "nullable" => TRUE,
@@ -67,7 +67,7 @@ return [
                 "wysiwyg" => TRUE,
             ],
         ],
-        [
+        "file" => [
             "name" => "file",
             "type" => "TEXT",
             "nullable" => TRUE,
@@ -77,7 +77,7 @@ return [
                 "file" => TRUE,
             ],
         ],
-        [
+        "image" => [
             "name" => "image",
             "type" => "TEXT",
             "nullable" => TRUE,
@@ -87,7 +87,7 @@ return [
                 "image" => "jpg,jpeg,png",
             ],
         ],
-        [
+        "i_p_address" => [
             "name" => "i_p_address",
             "type" => "VARCHAR",
             "nullable" => TRUE,
@@ -98,25 +98,25 @@ return [
                 "ipaddress" => TRUE,
             ],
         ],
-        [
+        "latitude" => [
             "name" => "latitude",
             "type" => "DECIMAL",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "longitude" => [
             "name" => "longitude",
             "type" => "DECIMAL",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "created_at" => [
             "name" => "created_at",
             "type" => "TIMESTAMP",
             "nullable" => TRUE,
             "default" => "NOW()",
         ],
-        [
+        "updated_at" => [
             "name" => "updated_at",
             "type" => "TIMESTAMP",
             "nullable" => TRUE,

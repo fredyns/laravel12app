@@ -31,8 +31,8 @@ class MakeParams extends Command
      */
     public function handle()
     {
-        if (!is_dir(self::APP_PATH)) {
-            mkdir(self::APP_PATH, 0775, true);
+        if (!is_dir(static::APP_PATH)) {
+            mkdir(static::APP_PATH, 0775, true);
         }
 
         $tables = iterator_to_array($this->tables());
@@ -48,7 +48,7 @@ class MakeParams extends Command
 
     protected function tables()
     {
-        $path = base_path(SELF::TABLE_PATH);
+        $path = base_path(static::TABLE_PATH);
         $files = scandir($path);
 
         foreach ($files as $file) {
@@ -73,7 +73,7 @@ class MakeParams extends Command
          *     job: - regenerate for new creation
          */
 
-        $path = base_path(self::APP_PATH . '/' . $tableName . '.php');
+        $path = base_path(static::APP_PATH . '/' . $tableName . '.php');
         if (file_exists($path)) {
             $param = $this->loadApp($path);
         } else {
@@ -97,18 +97,27 @@ class MakeParams extends Command
     protected function loadTable($tableName)
     {
         try {
-            $table = include base_path(self::TABLE_PATH . '/' . $tableName . '.php');
+            $table = include base_path(static::TABLE_PATH . '/' . $tableName . '.php');
         } catch (\Exception $exception) {
             $this->error($exception->getMessage());
             $table = null;
         } finally {
             if (!is_array($table)) return null;
 
+            $table['columns'] = iterator_to_array($this->addColumnKeys($table['columns']));
+
             if (!empty($table['foreignKeys'])) {
                 $table['foreignKeys'] = iterator_to_array($this->addFkKeys($table['foreignKeys']));
             }
 
             return $table;
+        }
+    }
+
+    protected function addColumnKeys($columns)
+    {
+        foreach ($columns as $column) {
+            yield $column['name'] => $column;
         }
     }
 
@@ -232,7 +241,7 @@ class MakeParams extends Command
             ],
         ];
 
-        return array_merge($table, $addon);
+        return array_merge_recursive($table, $addon);
     }
 
     /**
@@ -479,35 +488,35 @@ class MakeParams extends Command
 
     protected function tableTitleColumn($tableName)
     {
-        if (isset(self::$titleCols[$tableName])) return self::$titleCols[$tableName];
+        if (isset(static::$titleCols[$tableName])) return static::$titleCols[$tableName];
 
         $appropriateColumns = ['title', 'name', 'label', 'number', 'email'];
 
         try {
-            $table = include base_path(self::TABLE_PATH . '/' . $tableName . '.php');
+            $table = include base_path(static::TABLE_PATH . '/' . $tableName . '.php');
 
             // search exact name
             foreach ($table['columns'] as $column) {
                 if (in_array($column['name'], $appropriateColumns)) {
-                    return self::$titleCols[$tableName] = $column['name'];
+                    return static::$titleCols[$tableName] = $column['name'];
                 }
             }
 
             // search pattern
             foreach ($table['columns'] as $column) {
                 foreach ($appropriateColumns as $columnName) {
-                    if (str_contains($column['name'], $columnName)) return self::$titleCols[$tableName] = $column['name'];
+                    if (str_contains($column['name'], $columnName)) return static::$titleCols[$tableName] = $column['name'];
                 }
             }
 
             // fallback
-            if (isset($table['columns'][0]['name'])) return self::$titleCols[$tableName] = $table['columns'][0]['name'];
+            if (isset($table['columns'][0]['name'])) return static::$titleCols[$tableName] = $table['columns'][0]['name'];
 
         } catch (\Exception $exception) {
-            return self::$titleCols[$tableName] = null;
+            return static::$titleCols[$tableName] = null;
         }
 
-        return self::$titleCols[$tableName] = null;
+        return static::$titleCols[$tableName] = null;
     }
 
     protected function inputParam($column)
@@ -619,6 +628,6 @@ class MakeParams extends Command
 
     protected function saveParam($param, $tableName)
     {
-        Arraying::saveToFile($param, self::APP_PATH . '/' . $tableName . '.php');
+        Arraying::saveToFile($param, static::APP_PATH . '/' . $tableName . '.php');
     }
 }

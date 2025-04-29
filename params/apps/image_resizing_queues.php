@@ -3,19 +3,19 @@ return [
     "migrationPrefix" => "2025_04_29_075641",
     "name" => "image_resizing_queues",
     "columns" => [
-        [
+        "id" => [
             "name" => "id",
             "type" => "BINARY",
             "nullable" => FALSE,
             "default" => "(UUID_TO_BIN(UUID()))",
         ],
-        [
+        "created_at" => [
             "name" => "created_at",
             "type" => "TIMESTAMP",
             "nullable" => FALSE,
             "default" => "NOW()",
         ],
-        [
+        "source" => [
             "name" => "source",
             "type" => "TEXT",
             "nullable" => FALSE,
@@ -25,7 +25,7 @@ return [
                 "image" => "jpg,jpeg,png",
             ],
         ],
-        [
+        "save_as" => [
             "name" => "save_as",
             "type" => "TEXT",
             "nullable" => FALSE,
@@ -35,7 +35,7 @@ return [
                 "image" => "jpg,jpeg,png",
             ],
         ],
-        [
+        "width" => [
             "name" => "width",
             "type" => "INT",
             "nullable" => TRUE,
@@ -45,7 +45,7 @@ return [
                 "min" => 64,
             ],
         ],
-        [
+        "height" => [
             "name" => "height",
             "type" => "INT",
             "nullable" => TRUE,
@@ -55,20 +55,20 @@ return [
                 "min" => 64,
             ],
         ],
-        [
+        "remark" => [
             "name" => "remark",
             "type" => "TEXT",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "metadata" => [
             "name" => "metadata",
             "type" => "JSON",
             "nullable" => TRUE,
             "default" => NULL,
         ],
     ],
-    "foreignKeys" =>     [],
+    "foreignKeys" => [],
     "indices" => [
         [
             "name" => "created_at",

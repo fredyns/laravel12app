@@ -3,19 +3,19 @@ return [
     "migrationPrefix" => "2025_04_29_075641",
     "name" => "user_uploads",
     "columns" => [
-        [
+        "id" => [
             "name" => "id",
             "type" => "BINARY",
             "nullable" => FALSE,
             "default" => "(UUID_TO_BIN(UUID()))",
         ],
-        [
+        "at" => [
             "name" => "at",
             "type" => "TIMESTAMP",
             "nullable" => FALSE,
             "default" => NULL,
         ],
-        [
+        "user_id" => [
             "name" => "user_id",
             "type" => "BINARY",
             "nullable" => FALSE,
@@ -25,7 +25,7 @@ return [
                 "uuid" => TRUE,
             ],
         ],
-        [
+        "file" => [
             "name" => "file",
             "type" => "TEXT",
             "nullable" => FALSE,
@@ -35,27 +35,27 @@ return [
                 "file" => TRUE,
             ],
         ],
-        [
+        "name" => [
             "name" => "name",
             "type" => "VARCHAR",
             "nullable" => TRUE,
             "default" => NULL,
             "length" => 255,
         ],
-        [
+        "description" => [
             "name" => "description",
             "type" => "TEXT",
             "nullable" => TRUE,
             "default" => NULL,
         ],
-        [
+        "type" => [
             "name" => "type",
             "type" => "VARCHAR",
             "nullable" => TRUE,
             "default" => NULL,
             "length" => 255,
         ],
-        [
+        "metadata" => [
             "name" => "metadata",
             "type" => "JSON",
             "nullable" => TRUE,
