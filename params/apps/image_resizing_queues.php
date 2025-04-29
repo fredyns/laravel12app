@@ -93,12 +93,24 @@ return [
         "edit_title" => "Edit Image Resizing Queue",
         "show_title" => "Show Image Resizing Queue",
         "columns" => [
-            "user_id" => "User",
-            "string" => "String",
+            "id" => "Id",
+            "created_at" => "Created At",
+            "source" => "Source",
+            "save_as" => "Save As",
+            "width" => "Width",
+            "height" => "Height",
+            "remark" => "Remark",
+            "metadata" => "Metadata",
         ],
         "fields" => [
-            "user_id" => "User",
-            "string" => "String",
+            "id" => "Id",
+            "created_at" => "Created At",
+            "source" => "Source",
+            "save_as" => "Save As",
+            "width" => "Width",
+            "height" => "Height",
+            "remark" => "Remark",
+            "metadata" => "Metadata",
         ],
     ],
     "lang.id" => [
@@ -109,12 +121,24 @@ return [
         "edit_title" => "Edit Image Resizing Queue",
         "show_title" => "Lihat Image Resizing Queue",
         "columns" => [
-            "user_id" => "User",
-            "string" => "String",
+            "id" => "Id",
+            "created_at" => "Created At",
+            "source" => "Source",
+            "save_as" => "Save As",
+            "width" => "Width",
+            "height" => "Height",
+            "remark" => "Remark",
+            "metadata" => "Metadata",
         ],
         "fields" => [
-            "user_id" => "User",
-            "string" => "String",
+            "id" => "Id",
+            "created_at" => "Created At",
+            "source" => "Source",
+            "save_as" => "Save As",
+            "width" => "Width",
+            "height" => "Height",
+            "remark" => "Remark",
+            "metadata" => "Metadata",
         ],
     ],
     "faker" => [
@@ -144,52 +168,31 @@ return [
     "action.index" => [
         "type" => "index",
         "paginate" => 10,
-        "columns" => ["width", "height"],//todo: kenapa source gamasuk?
+        "columns" => ["width", "height"],
     ],
     "action.create" => [
         "type" => "create",
         "uploadPath" => "image_resizing_queues/{year}/{id}",
         "rules" => [
-            //todo: nama kolom gamasuk
-            ["required"],
-            ["required"],
-            ["required", "string", "image", "extensions:jpg,png"],
-            ["required", "string", "image", "extensions:jpg,png"],
-            ["nullable", "numeric", "min:64"],
-            ["nullable", "numeric", "min:64"],
-            ["nullable", "string"],
-            ["nullable"],//todo: null doank tipenya apa?
+            "id" => ["required", "string"],
+            "created_at" => ["required", "string"],
+            "source" => ["required", "string"],
+            "save_as" => ["required", "string"],
+            "width" => ["nullable", "numeric", "min:64"],
+            "height" => ["nullable", "numeric", "min:64"],
+            "remark" => ["nullable", "string"],
+            "metadata" => ["nullable", "string"],
         ],
         "sections" => [
             "general" => [
                 "title" => "Image Resizing Queue",
                 "fields" => [
-                    "id" => [// todo: PK mustinya diskip
-                        "type" => "text",
-                        "config" => [
-                            "required" => TRUE,
-                        ],
-                        "col" => "full",
-                        "col-md" => "full",
-                        "col-lg" => "full",
-                    ],
-                    "created_at" => [// todo: kolom sistem diskip aja
-                        "type" => "text",
-                        "config" => [
-                            "required" => TRUE,
-                        ],
-                        "col" => "full",
-                        "col-md" => "full",
-                        "col-lg" => "full",
-                    ],
                     "source" => [
                         "type" => "image",
                         "config" => [
                             "image" => "jpg,jpeg,png",
                             "required" => TRUE,
                         ],
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "save_as" => [
@@ -198,8 +201,6 @@ return [
                             "image" => "jpg,jpeg,png",
                             "required" => TRUE,
                         ],
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "width" => [
@@ -207,8 +208,6 @@ return [
                         "config" => [
                             "min" => 64,
                         ],
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "height" => [
@@ -216,20 +215,10 @@ return [
                         "config" => [
                             "min" => 64,
                         ],
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "remark" => [
                         "type" => "textarea",
-                        "col" => "full",
-                        "col-md" => "full",
-                        "col-lg" => "full",
-                    ],
-                    "metadata" => [//todo: ini jg kolom sistem
-                        "type" => "text",
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                 ],
@@ -240,45 +229,25 @@ return [
         "type" => "update",
         "uploadPath" => "image_resizing_queues/{year}/{id}",
         "rules" => [
-            ["required"],
-            ["required"],
-            ["required", "string", "image", "extensions:jpg,png"],
-            ["required", "string", "image", "extensions:jpg,png"],
-            ["nullable", "numeric", "min:64"],
-            ["nullable", "numeric", "min:64"],
-            ["nullable", "string"],
-            ["nullable"],
+            "id" => ["required", "string"],
+            "created_at" => ["required", "string"],
+            "source" => ["required", "string"],
+            "save_as" => ["required", "string"],
+            "width" => ["nullable", "numeric", "min:64"],
+            "height" => ["nullable", "numeric", "min:64"],
+            "remark" => ["nullable", "string"],
+            "metadata" => ["nullable", "string"],
         ],
         "sections" => [
             "general" => [
                 "title" => "Image Resizing Queue",
                 "fields" => [
-                    "id" => [
-                        "type" => "text",
-                        "config" => [
-                            "required" => TRUE,
-                        ],
-                        "col" => "full",
-                        "col-md" => "full",
-                        "col-lg" => "full",
-                    ],
-                    "created_at" => [
-                        "type" => "text",
-                        "config" => [
-                            "required" => TRUE,
-                        ],
-                        "col" => "full",
-                        "col-md" => "full",
-                        "col-lg" => "full",
-                    ],
                     "source" => [
                         "type" => "image",
                         "config" => [
                             "image" => "jpg,jpeg,png",
                             "required" => TRUE,
                         ],
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "save_as" => [
@@ -287,8 +256,6 @@ return [
                             "image" => "jpg,jpeg,png",
                             "required" => TRUE,
                         ],
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "width" => [
@@ -296,8 +263,6 @@ return [
                         "config" => [
                             "min" => 64,
                         ],
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "height" => [
@@ -305,20 +270,10 @@ return [
                         "config" => [
                             "min" => 64,
                         ],
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "remark" => [
                         "type" => "textarea",
-                        "col" => "full",
-                        "col-md" => "full",
-                        "col-lg" => "full",
-                    ],
-                    "metadata" => [
-                        "type" => "text",
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                 ],

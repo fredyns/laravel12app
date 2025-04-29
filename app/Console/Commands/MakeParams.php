@@ -26,6 +26,12 @@ class MakeParams extends Command
      */
     protected $description = 'Create parameters for app generator';
 
+    protected static array $systemColumns = [
+        'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
+        'email_verified_at', 'password', 'remember_token',
+        'metadata',
+    ];
+
     /**
      * Execute the console command.
      */
@@ -158,6 +164,7 @@ class MakeParams extends Command
         $nameStudly = Str::studly($nameSingular);
         $nameSnake = Str::snake($nameWithSpace);
         $nameSlug = Str::slug($nameWithSpace);
+        $labelParams = iterator_to_array($this->labelParams($table));
         $addon = [
             // lang
             'lang.en' => [
@@ -167,8 +174,8 @@ class MakeParams extends Command
                 'create_title' => 'Add ' . $nameSingular,
                 'edit_title' => 'Edit ' . $nameSingular,
                 'show_title' => 'Show ' . $nameSingular,
-                'columns' => $this->labelParams($table),
-                'fields' => $this->labelParams($table),
+                'columns' => $labelParams,
+                'fields' => $labelParams,
             ],
             'lang.id' => [
                 'name' => $namePlural,
@@ -177,8 +184,8 @@ class MakeParams extends Command
                 'create_title' => 'Tambah ' . $nameSingular,
                 'edit_title' => 'Edit ' . $nameSingular,
                 'show_title' => 'Lihat ' . $nameSingular,
-                'columns' => $this->labelParams($table),
-                'fields' => $this->labelParams($table),
+                'columns' => $labelParams,
+                'fields' => $labelParams,
             ],
             // faker
             'faker' => iterator_to_array($this->fakerParams($table)),
@@ -355,29 +362,27 @@ class MakeParams extends Command
 
     protected function columnParams($table)
     {
-        $exceptionsByName = [
-            'id', 'created_at', 'updated_at', 'created_by', 'updated_by',
-            'email_verified_at', 'password', 'remember_token',
-            'metadata',
-        ];
         $exceptionsByType = [
             'BINARY',
             'TEXT',
             'TIMESTAMP',
         ];
         foreach ($table['columns'] as $column) {
-            if (in_array($column['name'], $exceptionsByName)) continue;
+            if (in_array($column['name'], static::$systemColumns)) continue;
             if (in_array($column['type'], $exceptionsByType)) continue;
 
             yield $column['name'];
         }
     }
 
+
     protected function inputParams($table)
     {
         foreach ($table['columns'] as $column) {
             if (isset($table['foreignKeys'][$column['name']])) {
                 $param = $this->selectParam($column, $table['foreignKeys'][$column['name']]);
+            } else if (in_array($column['name'], static::$systemColumns)) {
+                continue;
             } else {
                 $param = $this->inputParam($column);
             }
@@ -388,33 +393,19 @@ class MakeParams extends Command
             }
 
             // common input params
-            $param += [
-                'col' => 'full',
-                'col-md' => 'full', // optional
-                'col-lg' => 'full', // optional
-            ];
+            $param += ['col-lg' => 'full'];
 
             yield $column['name'] => $param;
         }
-
-//        return [
-//            'field-name' => [
-//                'type' => 'string',
-//                'label' => 'Field',
-//                'placeholder' => 'Field',
-//                'description' => 'Field', // optional
-//                'col' => 'full',
-//                'col-md' => 'full', // optional
-//                'col-lg' => 'full', // optional
-//            ],
-//        ];
     }
 
     protected function ruleParams($table)
     {
         $foreignKeys = $table['foreignKeys'] ?? [];
         foreach ($table['columns'] as $column) {
-            yield $column['name'] = iterator_to_array($this->ruleParam($column, $foreignKeys));
+            if (in_array($column['name'], static::$systemColumns)) continue;
+
+            yield $column['name'] => iterator_to_array($this->ruleParam($column, $foreignKeys));
         }
     }
 
@@ -423,46 +414,53 @@ class MakeParams extends Command
         $name = $column['name'] ?? '-';
         $type = $column['type'] ?? 'VARCHAR';
 
+        //by mandatory
         if ($column['nullable'] ?? false) {
             yield 'nullable';
         } else {
             yield 'required';
         }
 
+        // by type
         $numeric = ['TINYINT', 'INT', 'BIGINT', 'DECIMAL', 'FLOAT', 'DOUBLE'];
-        if (in_array($type, $numeric)) yield 'numeric';
-
         $string = ['VARCHAR', 'TEXT'];
-        if (in_array($type, $string)) yield 'string';
-
-        if ($type === 'DATETIME') yield 'date';
-        if ($type === 'TIME') yield 'date_format:H:i';
-        if ($type === 'ENUM' && isset($column['options'])) yield 'in:' . implode(',', $column['options']);
-
-        if ($column['config']['uuid'] ?? false) yield 'uuid';
-        if ($column['config']['email'] ?? false) yield 'email';
-        if ($column['config']['ipaddress'] ?? false) yield 'ip';
-
-        if ($column['config']['url'] ?? false) {
+        if (in_array($type, $numeric)) {
+            yield 'numeric';
+        } else if (in_array($type, $string)) {
+            yield 'string';
+        } else if ($type === 'DATETIME') {
+            yield 'date';
+        } else if ($type === 'TIME') {
+            yield 'date_format:H:i';
+        } else if ($type === 'ENUM' && isset($column['options'])) {
+            yield 'in:' . implode(',', $column['options']);
+        } else if ($column['config']['uuid'] ?? false) {
+            yield 'uuid';
+        } else if ($column['config']['email'] ?? false) {
+            yield 'email';
+        } else if ($column['config']['ipaddress'] ?? false) {
+            yield 'ip';
+        } else if ($column['config']['url'] ?? false) {
             yield 'url:http,https';
-        }
-        if ($column['config']['file'] ?? false) {
+        } else if ($column['config']['file'] ?? false) {
             yield 'file';
             yield 'extensions:pdf,docx,xlsx,pptx,jpg,png,zip,rar';
-        }
-        if ($column['config']['image'] ?? false) {
+        } else if ($column['config']['image'] ?? false) {
             yield 'image';
             yield 'extensions:jpg,png';
+        } else {
+            yield 'string'; // fallback
         }
 
-        $rule1 = [
+        // addon
+        $addonRules = [
             'min', 'max', 'decimal',
             'lt', 'lte', 'gt', 'gte',
             'same', 'size', 'min_digits', 'regex',
             'after', 'before', 'after_or_equal', 'before_or_equal', 'date_equals', 'date_format',
             'dimensions',
         ];
-        foreach ($rule1 as $rule) {
+        foreach ($addonRules as $rule) {
             if (isset($column['config'][$rule])) yield $rule . ':' . $column['config'][$rule];
         }
 
@@ -610,20 +608,15 @@ class MakeParams extends Command
 
     protected function detailParam($column): array
     {
-        return [
-            'col' => 'full',
-            'col-md' => 'full',
-            'col-lg' => 'full',
-        ];
+        return ['col-lg' => 'full'];
     }
 
 
     protected function labelParams($table)
     {
-        return [
-            'user_id' => 'User',
-            'string' => 'String',
-        ];
+        foreach ($table['columns'] as $column) {
+            yield $column['name'] => Str::title(str_replace('_', ' ', $column['name']));
+        }
     }
 
     protected function saveParam($param, $tableName)

@@ -53,15 +53,17 @@ class Arraying
 
         if (static::areScalars($array)) {
             $array = array_map(fn($value) => "\"" . addslashes($value) . "\"", $array);
-            $result = '[' . implode(', ', $array) . ']';
+            $result = implode(', ', $array);
 
-            $limit = 80 - ($indent * static::TAB_SIZE);
+            $limit = 80 - ($indent * static::TAB_SIZE) - 10;
             if (strlen($result) > $limit) {
-                $childIndent = ($nextIndent + static::TAB_SIZE);
-                $result = str_replace("\", ", ("\",\n" . str_repeat(' ', $childIndent)), $result);
+                $childIndent = str_repeat(' ', ($nextIndent + static::TAB_SIZE));
+                $result = $childIndent
+                    . str_replace("\", ", ("\",\n" . $childIndent), $result)
+                    . "\n" . $childIndent;
             }
 
-            return $result;
+            return '[' . $result . ']';
         }
 
         $result = "[" . self::newline();

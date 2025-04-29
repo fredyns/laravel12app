@@ -97,12 +97,22 @@ return [
         "edit_title" => "Edit User Activity Log",
         "show_title" => "Show User Activity Log",
         "columns" => [
-            "user_id" => "User",
-            "string" => "String",
+            "id" => "Id",
+            "at" => "At",
+            "user_id" => "User Id",
+            "title" => "Title",
+            "link" => "Link",
+            "message" => "Message",
+            "i_p_address" => "I P Address",
         ],
         "fields" => [
-            "user_id" => "User",
-            "string" => "String",
+            "id" => "Id",
+            "at" => "At",
+            "user_id" => "User Id",
+            "title" => "Title",
+            "link" => "Link",
+            "message" => "Message",
+            "i_p_address" => "I P Address",
         ],
     ],
     "lang.id" => [
@@ -113,12 +123,22 @@ return [
         "edit_title" => "Edit User Activity Log",
         "show_title" => "Lihat User Activity Log",
         "columns" => [
-            "user_id" => "User",
-            "string" => "String",
+            "id" => "Id",
+            "at" => "At",
+            "user_id" => "User Id",
+            "title" => "Title",
+            "link" => "Link",
+            "message" => "Message",
+            "i_p_address" => "I P Address",
         ],
         "fields" => [
-            "user_id" => "User",
-            "string" => "String",
+            "id" => "Id",
+            "at" => "At",
+            "user_id" => "User Id",
+            "title" => "Title",
+            "link" => "Link",
+            "message" => "Message",
+            "i_p_address" => "I P Address",
         ],
     ],
     "faker" => [
@@ -153,34 +173,23 @@ return [
         "type" => "create",
         "uploadPath" => "user_activity_logs/{year}/{id}",
         "rules" => [
-            ["required"],
-            ["required"],
-            ["required", "uuid", "exists:users,id"],
-            ["required", "string"],
-            ["nullable", "string", "url:http,https"],
-            ["nullable", "string"],
-            ["nullable", "string", "ip"],
+            "id" => ["required", "string"],
+            "at" => ["required", "string"],
+            "user_id" => ["required", "uuid", "exists:users,id"],
+            "title" => ["required", "string"],
+            "link" => ["nullable", "string"],
+            "message" => ["nullable", "string"],
+            "i_p_address" => ["nullable", "string"],
         ],
         "sections" => [
             "general" => [
                 "title" => "User Activity Log",
                 "fields" => [
-                    "id" => [
-                        "type" => "text",
-                        "config" => [
-                            "required" => TRUE,
-                        ],
-                        "col" => "full",
-                        "col-md" => "full",
-                        "col-lg" => "full",
-                    ],
                     "at" => [
                         "type" => "text",
                         "config" => [
                             "required" => TRUE,
                         ],
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "user_id" => [
@@ -191,8 +200,6 @@ return [
                             "label" => "name",
                             "required" => TRUE,
                         ],
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "title" => [
@@ -200,26 +207,18 @@ return [
                         "config" => [
                             "required" => TRUE,
                         ],
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "link" => [
                         "type" => "textarea",
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "message" => [
                         "type" => "textarea",
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "i_p_address" => [
                         "type" => "ipaddress",
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                 ],
@@ -230,34 +229,23 @@ return [
         "type" => "update",
         "uploadPath" => "user_activity_logs/{year}/{id}",
         "rules" => [
-            ["required"],
-            ["required"],
-            ["required", "uuid", "exists:users,id"],
-            ["required", "string"],
-            ["nullable", "string", "url:http,https"],
-            ["nullable", "string"],
-            ["nullable", "string", "ip"],
+            "id" => ["required", "string"],
+            "at" => ["required", "string"],
+            "user_id" => ["required", "uuid", "exists:users,id"],
+            "title" => ["required", "string"],
+            "link" => ["nullable", "string"],
+            "message" => ["nullable", "string"],
+            "i_p_address" => ["nullable", "string"],
         ],
         "sections" => [
             "general" => [
                 "title" => "User Activity Log",
                 "fields" => [
-                    "id" => [
-                        "type" => "text",
-                        "config" => [
-                            "required" => TRUE,
-                        ],
-                        "col" => "full",
-                        "col-md" => "full",
-                        "col-lg" => "full",
-                    ],
                     "at" => [
                         "type" => "text",
                         "config" => [
                             "required" => TRUE,
                         ],
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "user_id" => [
@@ -268,8 +256,6 @@ return [
                             "label" => "name",
                             "required" => TRUE,
                         ],
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "title" => [
@@ -277,26 +263,18 @@ return [
                         "config" => [
                             "required" => TRUE,
                         ],
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "link" => [
                         "type" => "textarea",
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "message" => [
                         "type" => "textarea",
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                     "i_p_address" => [
                         "type" => "ipaddress",
-                        "col" => "full",
-                        "col-md" => "full",
                         "col-lg" => "full",
                     ],
                 ],
